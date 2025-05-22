@@ -1,41 +1,55 @@
+'use client';
+import { Button } from '@/components/ui/button';
 import {
     Card,
-    CardTitle,
-    CardDescription,
-    CardHeader,
     CardContent,
+    CardDescription,
     CardFooter,
+    CardHeader,
+    CardTitle,
 } from '@/components/ui/card';
 import { projects } from '@/mock/projectsMock';
+import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { useParams } from 'next/navigation';
 
-export default function Home() {
+export default function ProjectLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
+    const { projectId } = useParams();
+
+    const projectsFiltered = projects.filter(
+        (project) => project.id !== Number(projectId)
+    );
+
     return (
-        <div className="bg-[#F5F1E8]">
-            <section className="bg-[#F5F1E8]">
-                <section className="flex flex-col gap-4 max-w-screen-2xl mx-auto py-10">
-                    <h1 className="text-5xl font-black text-center mb-4 text-[#3E2C1B]">
-                        Pleasure for building <br /> software that serves people
-                    </h1>
-                    <p className="text-center text-xl font-medium text-[#444444]">
-                        Rock-solid stability, quality before speed, standards
-                        set high—if that’s your{' '}
-                        <span className="font-bold">culture</span>, let’s build
-                        together.
-                    </p>
-                </section>
+        <section className="flex flex-col gap-x-4 gap-y-2 lg:grid lg:grid-cols-12 lg:grid-rows-12 pt-4 px-10 bg-secondary lg:h-[89vh] lg:overflow-y-hidden">
+            <section className="col-start-1 col-end-13 row-start-1 row-end-2">
+                <Link href="/">
+                    <Button
+                        variant="outline"
+                        className="cursor-pointer bg-white border-gray-300 hover:bg-gray-100"
+                    >
+                        <ArrowLeft />
+                        Go back
+                    </Button>
+                </Link>
             </section>
 
-            <section className="flex flex-col gap-4 max-w-screen-2xl mx-auto py-10">
-                <h2 className="text-3xl font-bold text-center mb-4">
-                    Projects Where I Worked
-                </h2>
+            <section className="col-start-1 col-end-9 lg:h-[80vh] lg:overflow-y-auto bg-white px-8 py-10 rounded-lg shadow-sm">
+                {children}
+            </section>
 
-                <section className="flex flex-wrap gap-4">
-                    {projects.map((project) => (
-                        <Card key={project.id} className="max-w-md">
+            <ul className="col-start-9 col-end-13 px-4 flex flex-col gap-4 lg:h-[80vh] overflow-y-auto shadow-sm bg-white rounded-lg">
+                <h2 className="sticky top-0 bg-background px-5 pt-5 pb-3 text-2xl font-semibold">
+                    You might like
+                </h2>
+                {projectsFiltered.map((project) => (
+                    <li key={project.id}>
+                        <Card className="max-w-md lg:max-w-xl">
                             <CardHeader>
                                 <CardTitle>{project.title}</CardTitle>
                                 <CardDescription>
@@ -69,9 +83,9 @@ export default function Home() {
                                 </Link>
                             </CardFooter>
                         </Card>
-                    ))}
-                </section>
-            </section>
-        </div>
+                    </li>
+                ))}
+            </ul>
+        </section>
     );
 }

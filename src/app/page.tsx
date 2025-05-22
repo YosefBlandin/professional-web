@@ -13,8 +13,8 @@ import Link from 'next/link';
 
 export default function Home() {
     return (
-        <div className="bg-[#F5F1E8]">
-            <section className="bg-[#F5F1E8]">
+        <div>
+            <section>
                 <section className="flex flex-col gap-4 max-w-screen-2xl mx-auto py-10">
                     <h1 className="text-5xl font-black text-center mb-4 text-[#3E2C1B]">
                         Pleasure for building <br /> software that serves people

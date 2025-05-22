@@ -26,8 +26,8 @@ export default function ProjectLayout({
     );
 
     return (
-        <section className="flex flex-col gap-x-4 gap-y-2 lg:grid lg:grid-cols-12 lg:grid-rows-12 pt-4 px-10 bg-secondary lg:h-[89vh] lg:overflow-y-hidden">
-            <section className="col-start-1 col-end-13 row-start-1 row-end-2">
+        <section className="flex flex-col gap-x-4 gap-y-2 pt-4 px-10">
+            <section>
                 <Link href="/">
                     <Button
                         variant="outline"
@@ -39,53 +39,55 @@ export default function ProjectLayout({
                 </Link>
             </section>
 
-            <section className="col-start-1 col-end-9 lg:h-[80vh] lg:overflow-y-auto bg-white px-8 py-10 rounded-lg shadow-sm">
+            <section className=" bg-white px-8 py-10 rounded-lg">
                 {children}
             </section>
 
-            <ul className="col-start-9 col-end-13 px-4 flex flex-col gap-4 lg:h-[80vh] overflow-y-auto shadow-sm bg-white rounded-lg">
-                <h2 className="sticky top-0 bg-background px-5 pt-5 pb-3 text-2xl font-semibold">
+            <section className="mt-20">
+                <h2 className="sticky top-0 bg-background px-5 pt-5 pb-3 text-3xl font-semibold text-center lg:text-left">
                     You might like
                 </h2>
-                {projectsFiltered.map((project) => (
-                    <li key={project.id}>
-                        <Card className="max-w-md lg:max-w-xl">
-                            <CardHeader>
-                                <CardTitle>{project.title}</CardTitle>
-                                <CardDescription>
-                                    {project.description}
-                                </CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <Image
-                                    src={project.image}
-                                    alt={project.title}
-                                    className="aspect-video"
-                                    objectFit="cover"
-                                />
-                            </CardContent>
-                            <CardFooter className="flex gap-x-4 justify-end">
-                                <Link href={project.link}>
-                                    <Button
-                                        className="cursor-pointer"
-                                        variant="link"
-                                    >
-                                        Visit
-                                    </Button>
-                                </Link>
-                                <Link href={`/${project.id}`}>
-                                    <Button
-                                        className="cursor-pointer"
-                                        variant="default"
-                                    >
-                                        Know more
-                                    </Button>
-                                </Link>
-                            </CardFooter>
-                        </Card>
-                    </li>
-                ))}
-            </ul>
+                <ul className=" px-4 flex justify-center lg:justify-start flex-wrap gap-4 bg-white rounded-lg">
+                    {projectsFiltered.map((project) => (
+                        <li key={project.id}>
+                            <Card className="max-w-md lg:max-w-xl">
+                                <CardHeader>
+                                    <CardTitle>{project.title}</CardTitle>
+                                    <CardDescription>
+                                        {project.description}
+                                    </CardDescription>
+                                </CardHeader>
+                                <CardContent>
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        className="aspect-video"
+                                        objectFit="cover"
+                                    />
+                                </CardContent>
+                                <CardFooter className="flex gap-x-4 justify-end">
+                                    <Link href={project.link}>
+                                        <Button
+                                            className="cursor-pointer"
+                                            variant="link"
+                                        >
+                                            Visit
+                                        </Button>
+                                    </Link>
+                                    <Link href={`/${project.id}`}>
+                                        <Button
+                                            className="cursor-pointer"
+                                            variant="default"
+                                        >
+                                            Know more
+                                        </Button>
+                                    </Link>
+                                </CardFooter>
+                            </Card>
+                        </li>
+                    ))}
+                </ul>
+            </section>
         </section>
     );
 }

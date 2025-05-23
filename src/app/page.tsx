@@ -7,9 +7,12 @@ import {
     CardFooter,
 } from '@/components/ui/card';
 import { projects } from '@/mock/projectsMock';
+import { testimonialsMock } from '@/mock/testimonialsMock';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { truncateWithEllipsis } from '@/lib/utils';
+import { Star } from 'lucide-react';
 
 export default function Home() {
     return (
@@ -71,6 +74,88 @@ export default function Home() {
                         </Card>
                     ))}
                 </section>
+            </section>
+
+            <section className="mt-20  max-w-screen-2xl mx-auto px-4">
+                <h2 className="text-3xl font-bold text-center mb-8">
+                    Trusted by
+                </h2>
+
+                <section className="relative">
+                    <ul className="grid justify-center justify-items-center xl:justify-items-start lg:grid-cols-2 xl:grid-cols-3 gap-8">
+                        {testimonialsMock.map((testimonial) => (
+                            <li
+                                className="max-w-lg w-full h-full"
+                                key={testimonial.id}
+                            >
+                                <Card className="h-full">
+                                    <CardHeader className="flex justify-between">
+                                        <p className="text-sm text-gray-600 font-medium">
+                                            {testimonial.date}
+                                        </p>
+
+                                        <div className="flex gap-1">
+                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
+                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
+                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
+                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
+                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
+                                        </div>
+                                    </CardHeader>
+                                    <CardContent>
+                                        <p className="text-primary text-md">
+                                            {truncateWithEllipsis(
+                                                testimonial.text,
+                                                250
+                                            )}
+                                        </p>
+                                    </CardContent>
+                                    <CardFooter className="flex gap-x-4 justify-start mt-auto pt-6">
+                                        <article className="flex gap-4">
+                                            <Image
+                                                src={testimonial.image}
+                                                alt={testimonial.name}
+                                                className="rounded-full max-w-16"
+                                                objectFit="fill"
+                                            />
+                                            <div className="flex flex-col justify-center gap-1">
+                                                <span className="text-primary font-bold">
+                                                    {testimonial.name}
+                                                </span>
+                                                <span className="text-sm text-gray-500">
+                                                    {testimonial.position}
+                                                </span>
+                                            </div>
+                                        </article>
+                                    </CardFooter>
+                                </Card>
+                            </li>
+                        ))}
+                    </ul>
+
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex flex-col items-center justify-end bg-gradient-to-t from-white to-250% h-[50%] pb-60">
+                        <p className="text-primary text-2xl font-medium mb-2">
+                            Work ethic and commitment to excellence.
+                        </p>
+
+                        <p className="text-primary text-lg">
+                            Strong relationship are built on trust and respect
+                        </p>
+
+                        <Button
+                            variant="default"
+                            className="h-16 w-60 cursor-pointer mt-4"
+                        >
+                            See more on LinkedIn
+                        </Button>
+                    </div>
+                </section>
+            </section>
+
+            <section className="mt-20  max-w-screen-2xl mx-auto px-4">
+                <h2 className="text-3xl font-bold text-center mb-8">
+                    Contact me
+                </h2>
             </section>
         </div>
     );

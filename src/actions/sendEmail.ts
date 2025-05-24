@@ -1,10 +1,6 @@
 'use server';
 
-export async function sendEmail(_: {
-    email: string;
-    subject: string;
-    message: string;
-}) {
+export async function sendEmail() {
     try {
         // const res = await resend.emails.send({
         //     from: values.email,

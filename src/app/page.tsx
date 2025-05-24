@@ -62,9 +62,12 @@ export default function Home() {
                     Projects Where I Worked
                 </h2>
 
-                <section className="flex flex-wrap gap-4">
+                <section className="grid justify-center justify-items-center xl:justify-items-start lg:grid-cols-2 xl:grid-cols-3 gap-8">
                     {projects.map((project) => (
-                        <Card key={project.id} className="max-w-md">
+                        <Card
+                            key={project.id}
+                            className="w-full h-full max-w-md lg:max-w-lg"
+                        >
                             <CardHeader>
                                 <CardTitle>{project.title}</CardTitle>
                                 <CardDescription>

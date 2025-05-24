@@ -1,4 +1,3 @@
-'use client';
 import {
     Card,
     CardTitle,
@@ -15,19 +14,27 @@ import Link from 'next/link';
 import { truncateWithEllipsis } from '@/lib/utils';
 import { Star } from 'lucide-react';
 import profile from '@/assets/yosef.jpg';
+
+export async function generateMetadata() {
+    return {
+        title: 'Yosef Blandin | Frontend Engineer with 4+ years of experience',
+        description:
+            'Rock-solid stability, quality before speed, standards set high—if that’s your culture, let’s build together.',
+    };
+}
+
 export default function Home() {
     return (
         <div>
             <section>
                 <section className="flex flex-col gap-4 max-w-screen-2xl mx-auto py-10">
-                    <h1 className="text-5xl font-black text-center mb-4 text-[#3E2C1B]">
-                        Pleasure for building <br /> software that serves people
+                    <h1 className="text-3xl lg:text-5xl font-black text-center mb-4 text-[#3E2C1B]">
+                        Software with purpose. <br /> Interfaces that deliver.
                     </h1>
-                    <p className="text-center text-xl font-medium text-[#444444]">
-                        Rock-solid stability, quality before speed, standards
-                        set high—if that’s your{' '}
-                        <span className="font-bold">culture</span>, let’s build
-                        together.
+                    <p className="text-center text-md lg:text-xl font-medium text-[#444444]">
+                        I partner with product teams to build performant,
+                        resilient frontend systems <br /> aligned with long-term
+                        vision and measurable outcomes.
                     </p>
                     <section className="flex justify-center gap-x-6 mt-4">
                         <Link href="https://www.upwork.com/freelancers/~0125393fa7ef0842c8?mp_source=share">
@@ -51,7 +58,7 @@ export default function Home() {
             </section>
 
             <section className="flex flex-col gap-4 max-w-screen-2xl mx-auto py-10">
-                <h2 className="text-3xl font-bold text-center mb-4">
+                <h2 className="text-2xl lg:text-3xl font-bold text-center mb-4">
                     Projects Where I Worked
                 </h2>
 
@@ -96,7 +103,7 @@ export default function Home() {
             </section>
 
             <section className="mt-20  max-w-screen-2xl mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-8">
+                <h2 className="text-2xl lg:text-3xl font-bold text-center mb-8">
                     Trusted by
                 </h2>
 
@@ -153,11 +160,11 @@ export default function Home() {
                     </ul>
 
                     <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex flex-col items-center justify-end bg-gradient-to-t from-white to-250% h-[50%] pb-60">
-                        <p className="text-primary text-2xl font-medium mb-2">
+                        <p className="text-primary text-center text-2xl font-medium mb-2">
                             Work ethic and commitment to excellence.
                         </p>
 
-                        <p className="text-primary text-lg">
+                        <p className="text-primary text-center text-lg">
                             Strong relationship are built on trust and respect
                         </p>
 
@@ -175,7 +182,7 @@ export default function Home() {
 
             <section className="bg-[#111111] min-h-96">
                 <section className="mt-20  max-w-screen-2xl mx-auto px-4 py-20">
-                    <h2 className="text-3xl font-bold text-center mb-20 text-white">
+                    <h2 className="text-2xl lg:text-3xl font-bold text-center mb-20 text-white">
                         About me
                     </h2>
 
@@ -187,7 +194,7 @@ export default function Home() {
                         />
 
                         <section>
-                            <h6 className="text-white text-4xl font-bold mb-8">
+                            <h6 className="text-white text-2xl lg:text-4xl font-bold mb-8">
                                 Yosef Blandin
                             </h6>
                             <p className="text-white text-md lg:text-lg text-justify">

@@ -1,14 +1,29 @@
-'use client';
-import { useParams } from 'next/navigation';
 import { projects } from '@/mock/projectsMock';
 import Image from 'next/image';
-
 import parse from 'html-react-parser';
 
-export default function ProjectPage() {
-    const { projectId } = useParams();
+export async function generateMetadata({
+    params,
+}: {
+    params: { projectId: string };
+}) {
     const project = projects.find(
-        (project) => project.id === Number(projectId)
+        (project) => project.id === Number(params.projectId)
+    ) as (typeof projects)[number];
+
+    return {
+        title: project.title,
+        description: project.description,
+    };
+}
+
+export default function ProjectPage({
+    params,
+}: {
+    params: { projectId: string };
+}) {
+    const project = projects.find(
+        (project) => project.id === Number(params.projectId)
     ) as (typeof projects)[number];
 
     console.log(project);

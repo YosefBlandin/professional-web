@@ -30,15 +30,22 @@ export default function Home() {
                         together.
                     </p>
                     <section className="flex justify-center gap-x-6 mt-4">
-                        <Button
-                            variant={'outline'}
-                            className="bg-white cursor-pointer hover:bg-white/80"
-                        >
-                            Go to Upwork
-                        </Button>
-                        <Button variant={'default'} className="cursor-pointer">
-                            Go to LinkedIn
-                        </Button>
+                        <Link href="https://www.upwork.com/freelancers/~0125393fa7ef0842c8?mp_source=share">
+                            <Button
+                                variant={'outline'}
+                                className="bg-white cursor-pointer hover:bg-white/80"
+                            >
+                                Go to Upwork
+                            </Button>
+                        </Link>
+                        <Link href="https://www.linkedin.com/in/yosefblandin/">
+                            <Button
+                                variant={'default'}
+                                className="cursor-pointer"
+                            >
+                                Go to LinkedIn
+                            </Button>
+                        </Link>
                     </section>
                 </section>
             </section>

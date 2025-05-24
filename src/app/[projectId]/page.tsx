@@ -2,11 +2,11 @@ import { projects } from '@/mock/projectsMock';
 import Image from 'next/image';
 import parse from 'html-react-parser';
 
-export async function generateMetadata(
-    params: Promise<{
-        projectId: string;
-    }>
-) {
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ projectId: string }>;
+}) {
     const { projectId } = await params;
     const project = projects.find(
         (project) => project.id === Number(projectId)
@@ -18,16 +18,16 @@ export async function generateMetadata(
     };
 }
 
-export default function ProjectPage({
+export default async function ProjectPage({
     params,
 }: {
-    params: { projectId: string };
+    params: Promise<{ projectId: string }>;
 }) {
+    const { projectId } = await params;
     const project = projects.find(
-        (project) => project.id === Number(params.projectId)
+        (project) => project.id === Number(projectId)
     ) as (typeof projects)[number];
 
-    console.log(project);
     return (
         <div className="flex flex-col justify-center gap-4 xl:gap-6 lg:max-w-screen-md mx-auto">
             <h1 className="text-4xl xl:text-5xl font-semibold text-primary text-center">

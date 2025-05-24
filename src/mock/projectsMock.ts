@@ -220,21 +220,21 @@ export const projects = [
         ],
         link: 'https://my.zumetrics.vercel.app/',
         post: `
-				<p>
-					In Zumetrics I learned a lot about React, Next.js, TypeScript and SASS. It was my first job as a frontend developer, here I gained more proficiency in React and Next.js.
-				</p>
+					<p>
+						In Zumetrics I learned a lot about React, Next.js, TypeScript and SASS. It was my first job as a frontend developer, here I gained more proficiency in React and Next.js.
+					</p>
 
-				<br />
+					<br />
 
-				<p>
-					Here I had to build the login and register pages, I learned a lot about how to build a form and how to validate it. I learned about Auth0 to implement the authentication including multi-factor authentication.
-				</p>
+					<p>
+						Here I had to build the login and register pages, I learned a lot about how to build a form and how to validate it. I learned about Auth0 to implement the authentication including multi-factor authentication.
+					</p>
 
-				<br />
+					<br />
 
-				<p>
-					I had to fix bugs related to the charts too, we were using Recharts to build the charts.
-				</p>
+					<p>
+						I had to fix bugs related to the charts too, we were using Recharts to build the charts.
+					</p>
 		`,
     },
 ];

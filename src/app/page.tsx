@@ -1,3 +1,4 @@
+'use client';
 import {
     Card,
     CardTitle,
@@ -13,7 +14,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { truncateWithEllipsis } from '@/lib/utils';
 import { Star } from 'lucide-react';
-
+import profile from '@/assets/yosef.jpg';
 export default function Home() {
     return (
         <div>
@@ -28,6 +29,17 @@ export default function Home() {
                         <span className="font-bold">culture</span>, let’s build
                         together.
                     </p>
+                    <section className="flex justify-center gap-x-6 mt-4">
+                        <Button
+                            variant={'outline'}
+                            className="bg-white cursor-pointer hover:bg-white/80"
+                        >
+                            Go to Upwork
+                        </Button>
+                        <Button variant={'default'} className="cursor-pointer">
+                            Go to LinkedIn
+                        </Button>
+                    </section>
                 </section>
             </section>
 
@@ -49,7 +61,7 @@ export default function Home() {
                                 <Image
                                     src={project.image}
                                     alt={project.title}
-                                    className="aspect-video"
+                                    className="aspect-video rounded-md"
                                     objectFit="cover"
                                 />
                             </CardContent>
@@ -142,21 +154,140 @@ export default function Home() {
                             Strong relationship are built on trust and respect
                         </p>
 
-                        <Button
-                            variant="default"
-                            className="h-16 w-60 cursor-pointer mt-4"
-                        >
-                            See more on LinkedIn
-                        </Button>
+                        <Link href="https://www.linkedin.com/in/yosefblandin/">
+                            <Button
+                                variant="default"
+                                className="h-16 w-60 cursor-pointer mt-4"
+                            >
+                                See more on LinkedIn
+                            </Button>
+                        </Link>
                     </div>
                 </section>
             </section>
 
-            <section className="mt-20  max-w-screen-2xl mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center mb-8">
+            <section className="bg-[#111111] min-h-96">
+                <section className="mt-20  max-w-screen-2xl mx-auto px-4 py-20">
+                    <h2 className="text-3xl font-bold text-center mb-20 text-white">
+                        About me
+                    </h2>
+
+                    <section className="flex flex-col lg:flex-row items-center gap-30">
+                        <Image
+                            src={profile}
+                            alt="Profile"
+                            className="rounded-full max-w-md"
+                        />
+
+                        <section>
+                            <h6 className="text-white text-4xl font-bold mb-8">
+                                Yosef Blandin
+                            </h6>
+                            <p className="text-white text-md lg:text-lg text-justify">
+                                Frontend Engineer with 4+ years of experience
+                                crafting high-performance UIs in multiple
+                                industries. My work focuses on building robust
+                                platforms, real-time dashboards, and data-driven
+                                charts using React, Next.js, and TypeScript.
+                            </p>
+
+                            <br />
+
+                            <p className="text-white text-md lg:text-lg text-justify">
+                                I specialize in translating complex financial
+                                data into clean, intuitive interfaces—whether
+                                it&apos;s regulatory dashboards, trading
+                                insights, or internal analytics tools. I’ve
+                                worked with tools like Recharts, D3.js, and
+                                Chart.js, and I follow best practices in modular
+                                design, performance optimization, and scalable
+                                architecture. optimization, and scalable
+                                architecture.
+                            </p>
+
+                            <br />
+
+                            <p className="text-white text-md lg:text-lg text-justify">
+                                If you&apos;re building a fintech platform or
+                                need a fast, interactive, and reliable frontend
+                                for your data-rich product—let’s connect.
+                            </p>
+                        </section>
+                    </section>
+                </section>
+            </section>
+
+            {/* <section className="mt-20 max-w-screen-2xl mx-auto px-4 py-20">
+                <h2 className="text-3xl font-bold text-center mb-20 text-white">
                     Contact me
                 </h2>
-            </section>
+
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-8"
+                    >
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Email</FormLabel>
+                                    <FormControl>
+                                        <input
+                                            placeholder="john@example.com"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription>
+                                        This is your public display name.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="subject"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Subject</FormLabel>
+                                    <FormControl>
+                                        <input
+                                            placeholder="Subject"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription>
+                                        This is your public display name.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="message"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Message</FormLabel>
+                                    <FormControl>
+                                        <textarea
+                                            placeholder="Message"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormDescription>
+                                        This is your public display name.
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <Button type="submit">Submit</Button>
+                    </form>
+                </Form>
+            </section> */}
         </div>
     );
 }

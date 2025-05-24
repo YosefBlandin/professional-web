@@ -26,7 +26,7 @@ export default function ProjectLayout({
     );
 
     return (
-        <section className="flex flex-col gap-x-4 gap-y-2 pt-4 px-10">
+        <section className="flex flex-col gap-x-4 gap-y-2 pt-4 px-4 lg:px-10">
             <section>
                 <Link href="/">
                     <Button
@@ -39,7 +39,7 @@ export default function ProjectLayout({
                 </Link>
             </section>
 
-            <section className=" bg-white px-8 py-10 rounded-lg">
+            <section className=" bg-white lg:px-8 py-10 rounded-lg">
                 {children}
             </section>
 

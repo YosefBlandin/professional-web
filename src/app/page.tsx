@@ -193,7 +193,7 @@ export default function Home() {
                         <Image
                             src={profile}
                             alt="Profile"
-                            className="rounded-full max-w-md"
+                            className="rounded-full max-w-sm  lg:max-w-md"
                         />
 
                         <section>

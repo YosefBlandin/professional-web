@@ -2,13 +2,14 @@ import { projects } from '@/mock/projectsMock';
 import Image from 'next/image';
 import parse from 'html-react-parser';
 
-export async function generateMetadata({
-    params,
-}: {
-    params: { projectId: string };
-}) {
+export async function generateMetadata(
+    params: Promise<{
+        projectId: string;
+    }>
+) {
+    const { projectId } = await params;
     const project = projects.find(
-        (project) => project.id === Number(params.projectId)
+        (project) => project.id === Number(projectId)
     ) as (typeof projects)[number];
 
     return {

@@ -18,8 +18,26 @@ import profile from '@/assets/yosef.jpg';
 export async function generateMetadata() {
     return {
         title: 'Yosef Blandin | Frontend Engineer with 4+ years of experience',
-        description:
-            'Rock-solid stability, quality before speed, standards set high—if that’s your culture, let’s build together.',
+        description: `Yosef Blandin is a frontend engineer with 4+ years of experience. Focused on building performant, resilient frontend systems aligned with long-term vision and measurable outcomes.`,
+        generator: 'Next.js',
+        applicationName: 'Yosef Blandin Professional Website',
+        referrer: 'origin-when-cross-origin',
+        keywords: [
+            'Next.js',
+            'React',
+            'JavaScript',
+            'TypeScript',
+            'Yosef Blandin',
+            'Blandin',
+            'Yosef',
+            'Frontend Engineer',
+            'Frontend Developer',
+            'Data Visualization',
+            'Chart.js',
+            'D3.js',
+            'Recharts',
+        ],
+        authors: [{ name: 'Yosef Blandin' }],
     };
 }
 

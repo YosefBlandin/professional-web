@@ -30,18 +30,18 @@ export default async function ProjectPage({
 
     return (
         <div className="flex flex-col justify-center gap-4 xl:gap-6 lg:max-w-screen-md mx-auto">
-            <h1 className="text-4xl xl:text-5xl font-semibold text-primary text-center">
+            <h1 className="text-4xl xl:text-5xl font-semibold text-center font-[family-name:var(--font-space-grotesk)] neon-text-primary">
                 {project?.title}
             </h1>
-            <p className="text-lg xl:text-xl text-primary text-center font-medium">
+            <p className="text-lg xl:text-xl text-muted-foreground text-center font-medium">
                 {project?.description}
             </p>
             <Image
                 src={project?.image}
                 alt={String(project?.title)}
-                className="lg:max-w-screen-md"
+                className="lg:max-w-screen-md rounded-lg"
             />
-            <section className="prose mt-2 text-justify">
+            <section className="prose prose-invert mt-2 text-justify text-foreground [&_p]:text-foreground [&_li]:text-foreground">
                 {parse(String(project?.post))}
             </section>
         </div>

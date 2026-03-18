@@ -44,28 +44,51 @@ export async function generateMetadata() {
 export default function Home() {
     return (
         <div>
-            <section>
-                <section className="flex flex-col gap-4 max-w-screen-2xl mx-auto py-10">
-                    <h1 className="text-3xl lg:text-5xl font-black text-center mb-4 text-[#3E2C1B]">
+            {/* Hero Section */}
+            <section className="relative overflow-hidden">
+                <p
+                    aria-hidden="true"
+                    className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[8rem] md:text-[14rem] lg:text-[18rem] font-black font-[family-name:var(--font-space-grotesk)] text-accent/[0.04] select-none pointer-events-none whitespace-nowrap"
+                >
+                    ENGINEER
+                </p>
+
+                <section className="relative flex flex-col gap-4 max-w-screen-2xl mx-auto py-20 lg:py-28 px-4">
+                    <h1 className="text-3xl lg:text-5xl font-black text-center mb-4 font-[family-name:var(--font-space-grotesk)] neon-text-primary">
                         Software with purpose. <br /> Interfaces that deliver.
                     </h1>
-                    <p className="text-center text-md lg:text-xl font-medium text-[#444444]">
+                    <p className="text-center text-md lg:text-xl font-medium text-muted-foreground">
                         I partner with product teams to build performant,
                         resilient frontend systems <br /> aligned with long-term
                         vision and measurable outcomes.
                     </p>
-                    <section className="flex justify-center gap-x-6 mt-4">
+
+                    <p className="text-center text-sm lg:text-base mt-2 tracking-wide">
+                        <span className="neon-text-tertiary-light">
+                            Hablo Espa&ntilde;ol
+                        </span>
+                        <span className="text-muted-foreground mx-2">/</span>
+                        <span className="neon-text-primary-light">
+                            I speak English
+                        </span>
+                        <span className="text-muted-foreground mx-2">/</span>
+                        <span className="neon-text-accent-light">
+                            我说中文
+                        </span>
+                    </p>
+
+                    <section className="flex justify-center gap-x-6 mt-6">
                         <Link href="https://www.upwork.com/freelancers/~0125393fa7ef0842c8?mp_source=share">
                             <Button
-                                variant={'outline'}
-                                className="bg-white cursor-pointer hover:bg-white/80"
+                                variant="neon-outline"
+                                className="cursor-pointer"
                             >
                                 Go to Upwork
                             </Button>
                         </Link>
                         <Link href="https://www.linkedin.com/in/yosefblandin/">
                             <Button
-                                variant={'default'}
+                                variant="neon"
                                 className="cursor-pointer"
                             >
                                 Go to LinkedIn
@@ -75,10 +98,15 @@ export default function Home() {
                 </section>
             </section>
 
-            <section className="flex flex-col gap-4 max-w-screen-2xl mx-auto py-10">
-                <h2 className="text-2xl lg:text-3xl font-bold text-center mb-4">
-                    Projects Where I Worked
-                </h2>
+            {/* Projects Section */}
+            <section id="projects" className="flex flex-col gap-4 max-w-screen-2xl mx-auto py-10 px-4">
+                <div className="flex items-center gap-4 mb-4">
+                    <div className="h-px flex-1 bg-gradient-to-r from-transparent to-primary/30" />
+                    <h2 className="text-2xl lg:text-3xl font-bold text-center font-[family-name:var(--font-space-grotesk)]">
+                        Projects Where I Worked
+                    </h2>
+                    <div className="h-px flex-1 bg-gradient-to-l from-transparent to-primary/30" />
+                </div>
 
                 <section className="grid justify-center justify-items-center xl:justify-items-start lg:grid-cols-2 xl:grid-cols-3 gap-8">
                     {projects.map((project) => (
@@ -92,13 +120,23 @@ export default function Home() {
                                     {project.description}
                                 </CardDescription>
                             </CardHeader>
-                            <CardContent>
+                            <CardContent className="flex flex-col gap-3">
                                 <Image
                                     src={project.image}
                                     alt={project.title}
                                     className="aspect-video rounded-md"
                                     objectFit="cover"
                                 />
+                                <div className="flex flex-wrap gap-2">
+                                    {project.technologies.map((tech) => (
+                                        <span
+                                            key={tech}
+                                            className="text-xs px-2 py-1 rounded-full border border-primary/30 text-primary/80"
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
                             </CardContent>
                             <CardFooter className="flex gap-x-4 justify-end">
                                 <Link href={project.link}>
@@ -123,10 +161,15 @@ export default function Home() {
                 </section>
             </section>
 
-            <section className="mt-20  max-w-screen-2xl mx-auto px-4">
-                <h2 className="text-2xl lg:text-3xl font-bold text-center mb-8">
-                    Trusted by
-                </h2>
+            {/* Testimonials Section */}
+            <section id="testimonials" className="mt-20 max-w-screen-2xl mx-auto px-4">
+                <div className="flex items-center gap-4 mb-8">
+                    <div className="h-px flex-1 bg-gradient-to-r from-transparent to-accent/30" />
+                    <h2 className="text-2xl lg:text-3xl font-bold text-center font-[family-name:var(--font-space-grotesk)]">
+                        Trusted by
+                    </h2>
+                    <div className="h-px flex-1 bg-gradient-to-l from-transparent to-accent/30" />
+                </div>
 
                 <section className="relative">
                     <ul className="grid justify-center justify-items-center xl:justify-items-start lg:grid-cols-2 xl:grid-cols-3 gap-8">
@@ -137,20 +180,21 @@ export default function Home() {
                             >
                                 <Card className="h-full">
                                     <CardHeader className="flex justify-between">
-                                        <p className="text-sm text-gray-600 font-medium">
+                                        <p className="text-sm text-muted-foreground font-medium">
                                             {testimonial.date}
                                         </p>
 
                                         <div className="flex gap-1">
-                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
-                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
-                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
-                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
-                                            <Star className="text-primary fill-yellow-200 stroke-[1px]" />
+                                            {[...Array(5)].map((_, i) => (
+                                                <Star
+                                                    key={i}
+                                                    className="text-primary fill-primary/30 stroke-[1px]"
+                                                />
+                                            ))}
                                         </div>
                                     </CardHeader>
                                     <CardContent>
-                                        <p className="text-primary text-md">
+                                        <p className="text-foreground text-md">
                                             {truncateWithEllipsis(
                                                 testimonial.text,
                                                 250
@@ -169,7 +213,7 @@ export default function Home() {
                                                 <span className="text-primary font-bold">
                                                     {testimonial.name}
                                                 </span>
-                                                <span className="text-sm text-gray-500">
+                                                <span className="text-sm text-muted-foreground">
                                                     {testimonial.position}
                                                 </span>
                                             </div>
@@ -180,18 +224,18 @@ export default function Home() {
                         ))}
                     </ul>
 
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex flex-col items-center justify-end bg-gradient-to-t from-white to-250% h-[50%] pb-60">
-                        <p className="text-primary text-center text-2xl font-medium mb-2">
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full flex flex-col items-center justify-end bg-gradient-to-t from-background to-250% h-[50%] pb-60">
+                        <p className="neon-text-primary text-center text-2xl font-medium mb-2 font-[family-name:var(--font-space-grotesk)]">
                             Work ethic and commitment to excellence.
                         </p>
 
-                        <p className="text-primary text-center text-lg">
-                            Strong relationship are built on trust and respect
+                        <p className="text-muted-foreground text-center text-lg">
+                            Strong relationships are built on trust and respect
                         </p>
 
                         <Link href="https://www.linkedin.com/in/yosefblandin/">
                             <Button
-                                variant="default"
+                                variant="neon"
                                 className="h-16 w-60 cursor-pointer mt-4"
                             >
                                 See more on LinkedIn
@@ -201,128 +245,65 @@ export default function Home() {
                 </section>
             </section>
 
-            <section className="bg-[#111111] min-h-96">
-                <section className="mt-20  max-w-screen-2xl mx-auto px-4 py-20">
-                    <h2 className="text-2xl lg:text-3xl font-bold text-center mb-20 text-white">
-                        About me
-                    </h2>
+            {/* About Me Section */}
+            <section id="about" className="bg-card min-h-96">
+                <section className="mt-20 max-w-screen-2xl mx-auto px-4 py-20">
+                    <div className="flex items-center gap-4 mb-20">
+                        <div className="h-px flex-1 bg-gradient-to-r from-transparent to-tertiary/30" />
+                        <h2 className="text-2xl lg:text-3xl font-bold text-center font-[family-name:var(--font-space-grotesk)]">
+                            About me
+                        </h2>
+                        <div className="h-px flex-1 bg-gradient-to-l from-transparent to-tertiary/30" />
+                    </div>
 
                     <section className="flex flex-col lg:flex-row items-center gap-30">
-                        <Image
-                            src={profile}
-                            alt="Profile"
-                            className="rounded-full max-w-sm  lg:max-w-md"
-                        />
+                        <div className="relative">
+                            <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-primary via-accent to-tertiary opacity-30 blur-md" />
+                            <Image
+                                src={profile}
+                                alt="Profile"
+                                className="relative rounded-full max-w-sm lg:max-w-md ring-2 ring-primary/30"
+                            />
+                        </div>
 
                         <section>
-                            <h6 className="text-white text-2xl lg:text-4xl font-bold mb-8">
+                            <h6 className="text-2xl lg:text-4xl font-bold mb-8 font-[family-name:var(--font-space-grotesk)] neon-text-primary">
                                 Yosef Blandin
                             </h6>
-                            <p className="text-white text-md lg:text-lg text-justify">
+                            <p className="text-foreground text-md lg:text-lg text-justify">
                                 Frontend Engineer with 4+ years of experience
                                 crafting high-performance UIs in multiple
-                                industries. My work focuses on building robust
+                                industries. Native Spanish speaker, fluent in
+                                English, and conversational in Mandarin Chinese.
+                                My work focuses on building robust
                                 platforms, real-time dashboards, and data-driven
                                 charts using React, Next.js, and TypeScript.
                             </p>
 
                             <br />
 
-                            <p className="text-white text-md lg:text-lg text-justify">
+                            <p className="text-foreground text-md lg:text-lg text-justify">
                                 I specialize in translating complex financial
-                                data into clean, intuitive interfaces—whether
+                                data into clean, intuitive interfaces&mdash;whether
                                 it&apos;s regulatory dashboards, trading
-                                insights, or internal analytics tools. I’ve
+                                insights, or internal analytics tools. I&apos;ve
                                 worked with tools like Recharts, D3.js, and
                                 Chart.js, and I follow best practices in modular
                                 design, performance optimization, and scalable
-                                architecture. optimization, and scalable
                                 architecture.
                             </p>
 
                             <br />
 
-                            <p className="text-white text-md lg:text-lg text-justify">
+                            <p className="text-foreground text-md lg:text-lg text-justify">
                                 If you&apos;re building a fintech platform or
                                 need a fast, interactive, and reliable frontend
-                                for your data-rich product—let’s connect.
+                                for your data-rich product&mdash;let&apos;s connect.
                             </p>
                         </section>
                     </section>
                 </section>
             </section>
-
-            {/* <section className="mt-20 max-w-screen-2xl mx-auto px-4 py-20">
-                <h2 className="text-3xl font-bold text-center mb-20 text-white">
-                    Contact me
-                </h2>
-
-                <Form {...form}>
-                    <form
-                        onSubmit={form.handleSubmit(onSubmit)}
-                        className="space-y-8"
-                    >
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Email</FormLabel>
-                                    <FormControl>
-                                        <input
-                                            placeholder="john@example.com"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormDescription>
-                                        This is your public display name.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="subject"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Subject</FormLabel>
-                                    <FormControl>
-                                        <input
-                                            placeholder="Subject"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormDescription>
-                                        This is your public display name.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="message"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Message</FormLabel>
-                                    <FormControl>
-                                        <textarea
-                                            placeholder="Message"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormDescription>
-                                        This is your public display name.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <Button type="submit">Submit</Button>
-                    </form>
-                </Form>
-            </section> */}
         </div>
     );
 }

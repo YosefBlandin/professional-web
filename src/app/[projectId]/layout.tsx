@@ -30,8 +30,8 @@ export default function ProjectLayout({
             <section>
                 <Link href="/">
                     <Button
-                        variant="outline"
-                        className="cursor-pointer bg-white border-gray-300 hover:bg-gray-100"
+                        variant="neon-outline"
+                        className="cursor-pointer"
                     >
                         <ArrowLeft />
                         Go back
@@ -39,15 +39,15 @@ export default function ProjectLayout({
                 </Link>
             </section>
 
-            <section className=" bg-white lg:px-8 py-10 rounded-lg">
+            <section className="bg-card lg:px-8 py-10 rounded-lg border border-border">
                 {children}
             </section>
 
             <section className="mt-20">
-                <h2 className="sticky top-0 bg-background px-5 pt-5 pb-3 text-3xl font-semibold text-center lg:text-left">
+                <h2 className="sticky top-0 bg-background px-5 pt-5 pb-3 text-3xl font-semibold text-center lg:text-left font-[family-name:var(--font-space-grotesk)]">
                     You might like
                 </h2>
-                <ul className=" px-4 flex justify-center lg:justify-start flex-wrap gap-4 bg-white rounded-lg">
+                <ul className="px-4 flex justify-center lg:justify-start flex-wrap gap-4 rounded-lg">
                     {projectsFiltered.map((project) => (
                         <li key={project.id}>
                             <Card className="max-w-md lg:max-w-xl">
@@ -61,7 +61,7 @@ export default function ProjectLayout({
                                     <Image
                                         src={project.image}
                                         alt={project.title}
-                                        className="aspect-video"
+                                        className="aspect-video rounded-md"
                                         objectFit="cover"
                                     />
                                 </CardContent>

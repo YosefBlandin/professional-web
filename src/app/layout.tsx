@@ -42,10 +42,10 @@ export default function RootLayout({
                         </Link>
                         <nav className="hidden sm:flex gap-6">
                             <a
-                                href="#projects"
+                                href="#work"
                                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
                             >
-                                Projects
+                                Work
                             </a>
                             <a
                                 href="#testimonials"

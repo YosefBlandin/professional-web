@@ -1,9 +1,11 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useState, type ReactNode } from 'react';
 
 // On phones only the first three quotes show until the visitor asks for the rest; CSS does the hiding.
 export function QuoteList({ total, children }: { total: number; children: ReactNode }) {
+    const t = useTranslations('testimonials');
     const [expanded, setExpanded] = useState(false);
 
     return (
@@ -18,7 +20,7 @@ export function QuoteList({ total, children }: { total: number; children: ReactN
                 aria-expanded={expanded}
                 onClick={() => setExpanded((value) => !value)}
             >
-                {expanded ? 'Show fewer testimonials' : `Show all ${total} testimonials`}
+                {expanded ? t('showFewer') : t('showAll', { count: total })}
             </button>
         </>
     );

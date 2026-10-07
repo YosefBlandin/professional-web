@@ -1,5 +1,8 @@
-import { profile, siteUpdatedAt, siteUrl } from '@/content/profile';
+import { getContent } from '@/content';
+import { siteUpdatedAt, siteUrl } from '@/content/profile';
 import type { Project } from '@/content/projects';
+import type { Locale } from '@/i18n/routing';
+import { localizedPath } from './metadata';
 
 const personId = `${siteUrl}/#person`;
 const websiteId = `${siteUrl}/#website`;
@@ -9,7 +12,9 @@ export function jsonLdScript(data: object) {
     return { __html: JSON.stringify(data).replace(/</g, '\\u003c') };
 }
 
-export function homeJsonLd() {
+export function homeJsonLd(locale: Locale) {
+    const { profile } = getContent(locale);
+    const pageUrl = `${siteUrl}${localizedPath('/', locale) === '/' ? '' : localizedPath('/', locale)}`;
     return {
         '@context': 'https://schema.org',
         '@graph': [
@@ -18,14 +23,15 @@ export function homeJsonLd() {
                 '@id': websiteId,
                 url: siteUrl,
                 name: profile.name,
-                inLanguage: 'en',
+                inLanguage: ['en', 'es'],
                 publisher: { '@id': personId },
             },
             {
                 '@type': 'ProfilePage',
-                '@id': `${siteUrl}/#profile`,
-                url: siteUrl,
+                '@id': `${pageUrl}#profile`,
+                url: pageUrl,
                 name: `${profile.name} | ${profile.title}`,
+                inLanguage: locale,
                 isPartOf: { '@id': websiteId },
                 dateModified: siteUpdatedAt,
                 mainEntity: { '@id': personId },
@@ -65,8 +71,9 @@ export function homeJsonLd() {
     };
 }
 
-export function caseStudyJsonLd(project: Project) {
-    const url = `${siteUrl}/work/${project.slug}`;
+export function caseStudyJsonLd(project: Project, locale: Locale, labels: { home: string; work: string }) {
+    const url = `${siteUrl}${localizedPath(`/work/${project.slug}`, locale)}`;
+    const home = `${siteUrl}${localizedPath('/', locale) === '/' ? '' : localizedPath('/', locale)}`;
     return {
         '@context': 'https://schema.org',
         '@graph': [
@@ -77,19 +84,20 @@ export function caseStudyJsonLd(project: Project) {
                 name: project.title,
                 headline: project.seoTitle,
                 description: project.seoDescription,
-                image: `${url}/opengraph-image`,
+                // OG image routes always carry the locale segment, including English.
+                image: `${siteUrl}/${locale}/work/${project.slug}/opengraph-image`,
                 author: { '@id': personId },
                 about: { '@type': 'Organization', name: project.company },
                 keywords: project.tags.join(', '),
-                inLanguage: 'en',
+                inLanguage: locale,
                 dateModified: project.updatedAt,
                 isPartOf: { '@id': websiteId },
             },
             {
                 '@type': 'BreadcrumbList',
                 itemListElement: [
-                    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
-                    { '@type': 'ListItem', position: 2, name: 'Work', item: `${siteUrl}/#work` },
+                    { '@type': 'ListItem', position: 1, name: labels.home, item: home },
+                    { '@type': 'ListItem', position: 2, name: labels.work, item: `${home}#work` },
                     { '@type': 'ListItem', position: 3, name: project.title, item: url },
                 ],
             },

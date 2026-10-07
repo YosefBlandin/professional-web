@@ -1,5 +1,9 @@
+import createIntlMiddleware from 'next-intl/middleware';
 import { NextResponse, type NextRequest } from 'next/server';
 import { productionHost } from '@/content/profile';
+import { routing } from '@/i18n/routing';
+
+const intlMiddleware = createIntlMiddleware(routing);
 
 export function middleware(request: NextRequest) {
     const host = (request.headers.get('host') ?? '').split(':')[0];
@@ -13,12 +17,14 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(url, 301);
     }
 
-    const response = NextResponse.next();
+    const response = intlMiddleware(request);
     // Preview deployments (workers.dev, localhost) must never be indexed.
     if (host !== productionHost) response.headers.set('X-Robots-Tag', 'noindex');
     return response;
 }
 
 export const config = {
-    matcher: ['/((?!_next/static|_next/image|.*\\.(?:png|jpg|jpeg|svg|ico|webp|avif|woff2)$).*)'],
+    // Everything except Next internals, files with an extension, the root-level apple-icon route, and
+    // OG images: their URLs always carry the locale (/en/…/opengraph-image) and must not be redirected.
+    matcher: ['/((?!_next|_vercel|apple-icon|.*opengraph-image|.*\\..*).*)'],
 };

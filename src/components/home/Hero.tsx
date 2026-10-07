@@ -1,11 +1,15 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import portrait from '@/assets/yosef-portrait.jpg';
-import { profile, proof } from '@/content/profile';
-
-const portraitAlt = 'Portrait of Yosef Blandin wearing glasses, a black turtleneck and a brown jacket';
+import { getContent } from '@/content';
+import { Link } from '@/i18n/navigation';
+import type { Locale } from '@/i18n/routing';
 
 export function Hero() {
+    const t = useTranslations('hero');
+    const tNav = useTranslations('nav');
+    const { profile, proof } = getContent(useLocale() as Locale);
+
     return (
         <>
             <section className="hero" aria-labelledby="hero-title">
@@ -28,19 +32,15 @@ export function Hero() {
                             <span className="label hero-name">
                                 {profile.name} · {profile.location}
                             </span>
-                            Mobile and frontend engineer, <em>focused on payments and banking.</em>
+                            {t.rich('headline', { em: (chunks) => <em>{chunks}</em> })}
                         </h1>
-                        <p className="lede">
-                            5+ years shipping <strong>React, React Native, Next.js and TypeScript</strong>, the last three
-                            in payments and banking: a bank’s iOS and Android app, and a 14-language aid-payments app NGOs
-                            use in the field.
-                        </p>
+                        <p className="lede">{t.rich('lede', { strong: (chunks) => <strong>{chunks}</strong> })}</p>
                         <div className="cta-row">
-                            <Link className="btn btn-primary" href="#contact">
-                                Get in touch
+                            <Link className="btn btn-primary" href="/#contact">
+                                {tNav('getInTouch')}
                             </Link>
-                            <Link className="btn btn-ghost" href="#work">
-                                See selected work{' '}
+                            <Link className="btn btn-ghost" href="/#work">
+                                {t('seeWork')}{' '}
                                 <span className="arrow" aria-hidden="true">
                                     →
                                 </span>
@@ -48,14 +48,14 @@ export function Hero() {
                         </div>
                         <p className="status">
                             <span className="dot" aria-hidden="true" />
-                            Open to new roles and freelance work
+                            {t('status')}
                         </p>
                     </div>
                     <figure className="portrait">
                         <div className="frame">
                             <Image
                                 src={portrait}
-                                alt={portraitAlt}
+                                alt={t('portraitAlt')}
                                 sizes="(max-width: 760px) 1px, 440px"
                                 placeholder="blur"
                                 priority
@@ -69,7 +69,7 @@ export function Hero() {
                 </div>
             </section>
 
-            <section className="proof" aria-label="At a glance">
+            <section className="proof" aria-label={t('atAGlance')}>
                 <ul className="wrap">
                     {proof.map((item) => (
                         <li key={item.value}>

@@ -1,14 +1,18 @@
-import { experience, skills } from '@/content/experience';
-import { profile } from '@/content/profile';
+import { useLocale, useTranslations } from 'next-intl';
+import { getContent } from '@/content';
+import type { Locale } from '@/i18n/routing';
 
 export function Experience() {
+    const t = useTranslations('experience');
+    const { experience, profile } = getContent(useLocale() as Locale);
+
     return (
         <section className="section alt" id="experience" aria-labelledby="exp-title">
             <div className="wrap">
                 <div className="section-head">
-                    <p className="label">Experience</p>
-                    <h2 id="exp-title">5+ years, all remote</h2>
-                    <p>Product teams, an agency and a startup, working across time zones from UTC-3.</p>
+                    <p className="label">{t('label')}</p>
+                    <h2 id="exp-title">{t('title')}</h2>
+                    <p>{t('intro')}</p>
                 </div>
                 <ol className="timeline">
                     {experience.map((item) => (
@@ -30,9 +34,9 @@ export function Experience() {
                 </ol>
                 <div className="after-list">
                     <a className="btn btn-ghost btn-sm" href={profile.links.linkedin} target="_blank" rel="noopener">
-                        Full résumé on LinkedIn <span aria-hidden="true">↗</span>
+                        {t('resume')} <span aria-hidden="true">↗</span>
                     </a>
-                    <span>Platzi Frontend Developer, plus 65 certifications (2020 – 2023).</span>
+                    <span>{t('education')}</span>
                 </div>
             </div>
         </section>
@@ -40,13 +44,16 @@ export function Experience() {
 }
 
 export function Skills() {
+    const t = useTranslations('skills');
+    const { skills } = getContent(useLocale() as Locale);
+
     return (
         <section className="section" id="skills" aria-labelledby="skills-title">
             <div className="wrap">
                 <div className="section-head">
-                    <p className="label">Skills</p>
-                    <h2 id="skills-title">Tools I use every week</h2>
-                    <p>Grouped by the job they do, not by how long I’ve known them.</p>
+                    <p className="label">{t('label')}</p>
+                    <h2 id="skills-title">{t('title')}</h2>
+                    <p>{t('intro')}</p>
                 </div>
                 <div className="skills">
                     {skills.map((skill) => (

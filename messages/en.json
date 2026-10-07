@@ -1,0 +1,105 @@
+{
+    "nav": {
+        "home": "Yosef Blandin, home",
+        "skip": "Skip to content",
+        "work": "Work",
+        "experience": "Experience",
+        "testimonials": "Testimonials",
+        "about": "About",
+        "getInTouch": "Get in touch",
+        "theme": "Theme",
+        "toggleTheme": "Switch colour theme",
+        "openMenu": "Open menu",
+        "closeMenu": "Close menu",
+        "main": "Main",
+        "language": "Language",
+        "switchTo": "Leer en español"
+    },
+    "hero": {
+        "headline": "Mobile and frontend engineer, <em>focused on payments and banking.</em>",
+        "lede": "5+ years shipping <strong>React, React Native, Next.js and TypeScript</strong>, the last three in payments and banking: a bank’s iOS and Android app, and a 14-language aid-payments app NGOs use in the field.",
+        "seeWork": "See selected work",
+        "status": "Open to new roles and freelance work",
+        "portraitAlt": "Portrait of Yosef Blandin wearing glasses, a black turtleneck and a brown jacket",
+        "atAGlance": "At a glance"
+    },
+    "work": {
+        "label": "Selected work",
+        "title": "Products in production",
+        "intro": "Six products, from aid payments in the field to a bank’s app in the stores. Each one lists the problem, what I built and what changed.",
+        "readCaseStudy": "Read case study"
+    },
+    "experience": {
+        "label": "Experience",
+        "title": "5+ years, all remote",
+        "intro": "Product teams, an agency and a startup, working across time zones from UTC-3.",
+        "resume": "Full résumé on LinkedIn",
+        "education": "Platzi Frontend Developer, plus 65 certifications (2020 – 2023)."
+    },
+    "skills": {
+        "label": "Skills",
+        "title": "Tools I use every week",
+        "intro": "Grouped by the job they do, not by how long I’ve known them."
+    },
+    "testimonials": {
+        "label": "Testimonials",
+        "title": "What people I’ve worked with say",
+        "linkedin": "Read all recommendations on LinkedIn",
+        "showAll": "Show all {count} testimonials",
+        "showFewer": "Show fewer testimonials",
+        "readMore": "Read more",
+        "showLess": "Show less"
+    },
+    "about": {
+        "label": "About",
+        "title": "Calm interfaces for high-stakes flows.",
+        "p1": "I’m a frontend and mobile engineer with 5+ years of experience. For the last three I’ve worked on money: transfers, payouts, cards and receipts, where a confusing screen costs someone real money.",
+        "p2": "I like owning a product end to end, from the first commit to the store release, and I care about the unglamorous parts: error handling, offline states, feature-flagged rollouts and tests."
+    },
+    "contact": {
+        "label": "Contact",
+        "title": "Building something with <em>money</em> in it?",
+        "hint": "I usually reply within one working day.",
+        "copy": "Copy",
+        "copied": "Copied",
+        "selectAndCopy": "Select and copy",
+        "copyEmail": "Copy email",
+        "emailLabel": "Your email",
+        "emailPlaceholder": "you@company.com",
+        "subjectLabel": "Subject",
+        "subjectPlaceholder": "React Native role, payments app",
+        "messageLabel": "Message",
+        "messagePlaceholder": "What are you building, and where could I help?",
+        "send": "Send message",
+        "sending": "Sending…",
+        "sentTitle": "Message sent.",
+        "sentBody": "I’ll reply within one working day.",
+        "sendAnother": "Send another",
+        "failedTitle": "Your message didn’t send.",
+        "failedBody": "Try again, or email me directly at {email}.",
+        "errors": {
+            "emailRequired": "Enter your email so I can reply.",
+            "emailInvalid": "Enter an email like you@company.com.",
+            "subjectRequired": "Add a subject.",
+            "subjectTooLong": "Keep the subject under 150 characters.",
+            "messageRequired": "Write a short message.",
+            "messageTooLong": "Keep the message under 5,000 characters."
+        }
+    },
+    "study": {
+        "allWork": "All work",
+        "close": "Close case study",
+        "technologies": "Technologies",
+        "caseStudy": "Case study"
+    },
+    "footer": {
+        "backToTop": "Back to top"
+    },
+    "notFound": {
+        "metaTitle": "Page not found",
+        "title": "This page doesn’t exist.",
+        "body": "The link may be old or mistyped. Here’s where to go instead.",
+        "seeWork": "See selected work",
+        "getInTouch": "Get in touch"
+    }
+}

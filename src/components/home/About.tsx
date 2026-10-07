@@ -1,24 +1,23 @@
-import { profile } from '@/content/profile';
+import { useLocale, useTranslations } from 'next-intl';
+import { getContent } from '@/content';
+import type { Locale } from '@/i18n/routing';
 
 export function About() {
+    const t = useTranslations('about');
+    const { profile } = getContent(useLocale() as Locale);
+
     return (
         <section className="section" id="about" aria-labelledby="about-title">
             <div className="wrap about-grid">
                 <div>
                     <p className="label" style={{ marginBottom: 16 }}>
-                        About
+                        {t('label')}
                     </p>
-                    <h2 id="about-title">Calm interfaces for high-stakes flows.</h2>
+                    <h2 id="about-title">{t('title')}</h2>
                 </div>
                 <div className="about-copy">
-                    <p>
-                        I’m a frontend and mobile engineer with 5+ years of experience. For the last three I’ve worked on
-                        money: transfers, payouts, cards and receipts, where a confusing screen costs someone real money.
-                    </p>
-                    <p>
-                        I like owning a product end to end, from the first commit to the store release, and I care about
-                        the unglamorous parts: error handling, offline states, feature-flagged rollouts and tests.
-                    </p>
+                    <p>{t('p1')}</p>
+                    <p>{t('p2')}</p>
                     <dl className="facts">
                         {profile.facts.map((fact) => (
                             <div key={fact.label}>

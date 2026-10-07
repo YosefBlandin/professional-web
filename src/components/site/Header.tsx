@@ -1,18 +1,43 @@
 'use client';
 
-import Link from 'next/link';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useRef, useState, type MouseEvent } from 'react';
+import { Link, usePathname } from '@/i18n/navigation';
+import { routing } from '@/i18n/routing';
 import { CloseIcon, MenuIcon } from './Icons';
 import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
-    { href: '/#work', label: 'Work' },
-    { href: '/#experience', label: 'Experience' },
-    { href: '/#testimonials', label: 'Testimonials' },
-    { href: '/#about', label: 'About' },
-];
+    { href: '/#work', key: 'work' },
+    { href: '/#experience', key: 'experience' },
+    { href: '/#testimonials', key: 'testimonials' },
+    { href: '/#about', key: 'about' },
+] as const;
+
+// Links to the same page in the other language. A plain link: visitors are never redirected by browser language.
+function LanguageSwitch({ className }: { className: string }) {
+    const t = useTranslations('nav');
+    const locale = useLocale();
+    const pathname = usePathname();
+    return (
+        <div className={className} role="group" aria-label={t('language')}>
+            {routing.locales.map((other) =>
+                other === locale ? (
+                    <span key={other} aria-current="true">
+                        {other.toUpperCase()}
+                    </span>
+                ) : (
+                    <Link key={other} href={pathname} locale={other} hrefLang={other} lang={other} title={t('switchTo')}>
+                        {other.toUpperCase()}
+                    </Link>
+                ),
+            )}
+        </div>
+    );
+}
 
 export function Header() {
+    const t = useTranslations('nav');
     const [scrolled, setScrolled] = useState(false);
     const [open, setOpen] = useState(false);
     const menuButton = useRef<HTMLButtonElement>(null);
@@ -59,29 +84,34 @@ export function Header() {
     return (
         <header className={`site-header${scrolled ? ' scrolled' : ''}`} id="top">
             <div className="wrap bar">
-                <Link className="mark" href="/" aria-label="Yosef Blandin, home">
+                <Link className="mark" href="/" aria-label={t('home')}>
                     Yosef <i>Blandin</i>
                 </Link>
                 <div className="bar-actions">
-                    <nav className="nav" id="nav" data-open={open} aria-label="Main" onClick={onNavClick}>
+                    <nav className="nav" id="nav" data-open={open} aria-label={t('main')} onClick={onNavClick}>
                         {navItems.map((item) => (
                             <Link key={item.href} href={item.href}>
-                                {item.label}
+                                {t(item.key)}
                             </Link>
                         ))}
                         <Link className="btn btn-primary btn-sm nav-cta" href="/#contact">
-                            Get in touch
+                            {t('getInTouch')}
                         </Link>
                         <div className="nav-theme">
-                            <span>Theme</span>
+                            <span>{t('theme')}</span>
                             <ThemeToggle />
                         </div>
+                        <div className="nav-theme">
+                            <span>{t('language')}</span>
+                            <LanguageSwitch className="lang-switch" />
+                        </div>
                     </nav>
+                    <LanguageSwitch className="lang-switch bar-lang" />
                     <div className="bar-theme">
                         <ThemeToggle />
                     </div>
                     <Link className="btn btn-primary btn-sm header-cta" href="/#contact">
-                        Get in touch
+                        {t('getInTouch')}
                     </Link>
                     <button
                         ref={menuButton}
@@ -89,7 +119,7 @@ export function Header() {
                         type="button"
                         aria-controls="nav"
                         aria-expanded={open}
-                        aria-label={open ? 'Close menu' : 'Open menu'}
+                        aria-label={open ? t('closeMenu') : t('openMenu')}
                         onClick={() => setOpen((value) => !value)}
                     >
                         {open ? <CloseIcon /> : <MenuIcon />}

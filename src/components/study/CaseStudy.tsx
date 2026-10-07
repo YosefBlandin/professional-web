@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { ProjectLink } from '@/components/home/CaseCard';
 import type { Project } from '@/content/projects';
 
@@ -6,6 +7,7 @@ export function studyKicker(project: Project) {
 }
 
 export function CaseStudyBody({ project }: { project: Project }) {
+    const t = useTranslations('study');
     return (
         <div className="study-body">
             <p>{project.study.intro}</p>
@@ -19,7 +21,7 @@ export function CaseStudyBody({ project }: { project: Project }) {
                     </ul>
                 </section>
             ))}
-            <ul className="tags" aria-label="Technologies">
+            <ul className="tags" aria-label={t('technologies')}>
                 {project.tags.map((tag) => (
                     <li key={tag}>{tag}</li>
                 ))}

@@ -1,0 +1,105 @@
+{
+    "nav": {
+        "home": "Yosef Blandin, inicio",
+        "skip": "Ir al contenido",
+        "work": "Proyectos",
+        "experience": "Experiencia",
+        "testimonials": "Recomendaciones",
+        "about": "Sobre mí",
+        "getInTouch": "Contáctame",
+        "theme": "Tema",
+        "toggleTheme": "Cambiar el tema de color",
+        "openMenu": "Abrir menú",
+        "closeMenu": "Cerrar menú",
+        "main": "Principal",
+        "language": "Idioma",
+        "switchTo": "Read in English"
+    },
+    "hero": {
+        "headline": "Ingeniero mobile y frontend, <em>enfocado en pagos y banca.</em>",
+        "lede": "Más de 5 años desarrollando con <strong>React, React Native, Next.js y TypeScript</strong>, los últimos tres en pagos y banca: la app iOS y Android de un banco, y una app de pagos de ayuda humanitaria en 14 idiomas que usan ONG en el terreno.",
+        "seeWork": "Ver proyectos",
+        "status": "Disponible para nuevos roles y trabajo freelance",
+        "portraitAlt": "Retrato de Yosef Blandin con anteojos, polera negra y chaqueta marrón",
+        "atAGlance": "En resumen"
+    },
+    "work": {
+        "label": "Proyectos destacados",
+        "title": "Productos en producción",
+        "intro": "Seis productos, desde pagos de ayuda humanitaria en el terreno hasta la app de un banco en las tiendas. Cada uno cuenta el problema, qué construí y qué cambió.",
+        "readCaseStudy": "Leer el caso"
+    },
+    "experience": {
+        "label": "Experiencia",
+        "title": "Más de 5 años, todos remotos",
+        "intro": "Equipos de producto, una agencia y una startup, trabajando entre zonas horarias desde UTC-3.",
+        "resume": "CV completo en LinkedIn",
+        "education": "Platzi Frontend Developer, más 65 certificaciones (2020 – 2023)."
+    },
+    "skills": {
+        "label": "Habilidades",
+        "title": "Herramientas que uso cada semana",
+        "intro": "Agrupadas por lo que resuelven, no por cuánto tiempo hace que las conozco."
+    },
+    "testimonials": {
+        "label": "Recomendaciones",
+        "title": "Lo que dicen quienes trabajaron conmigo",
+        "linkedin": "Ver todas las recomendaciones en LinkedIn",
+        "showAll": "Ver las {count} recomendaciones",
+        "showFewer": "Ver menos recomendaciones",
+        "readMore": "Leer más",
+        "showLess": "Ver menos"
+    },
+    "about": {
+        "label": "Sobre mí",
+        "title": "Interfaces tranquilas para flujos críticos.",
+        "p1": "Soy ingeniero frontend y mobile con más de 5 años de experiencia. Los últimos tres trabajé con dinero: transferencias, pagos, tarjetas y comprobantes, donde una pantalla confusa le cuesta dinero real a alguien.",
+        "p2": "Me gusta hacerme cargo de un producto de punta a punta, desde el primer commit hasta la publicación en las tiendas, y cuido las partes menos vistosas: manejo de errores, estados sin conexión, lanzamientos con feature flags y tests."
+    },
+    "contact": {
+        "label": "Contacto",
+        "title": "¿Estás construyendo algo con <em>dinero</em> de por medio?",
+        "hint": "Suelo responder en un día hábil.",
+        "copy": "Copiar",
+        "copied": "Copiado",
+        "selectAndCopy": "Selecciona y copia",
+        "copyEmail": "Copiar email",
+        "emailLabel": "Tu email",
+        "emailPlaceholder": "tu@empresa.com",
+        "subjectLabel": "Asunto",
+        "subjectPlaceholder": "Puesto React Native, app de pagos",
+        "messageLabel": "Mensaje",
+        "messagePlaceholder": "¿Qué estás construyendo y en qué te puedo ayudar?",
+        "send": "Enviar mensaje",
+        "sending": "Enviando…",
+        "sentTitle": "Mensaje enviado.",
+        "sentBody": "Te respondo en un día hábil.",
+        "sendAnother": "Enviar otro",
+        "failedTitle": "Tu mensaje no se envió.",
+        "failedBody": "Prueba de nuevo o escríbeme directamente a {email}.",
+        "errors": {
+            "emailRequired": "Ingresa tu email para que pueda responderte.",
+            "emailInvalid": "Ingresa un email como tu@empresa.com.",
+            "subjectRequired": "Agrega un asunto.",
+            "subjectTooLong": "El asunto debe tener menos de 150 caracteres.",
+            "messageRequired": "Escribe un mensaje corto.",
+            "messageTooLong": "El mensaje debe tener menos de 5.000 caracteres."
+        }
+    },
+    "study": {
+        "allWork": "Todos los proyectos",
+        "close": "Cerrar el caso",
+        "technologies": "Tecnologías",
+        "caseStudy": "Caso"
+    },
+    "footer": {
+        "backToTop": "Volver arriba"
+    },
+    "notFound": {
+        "metaTitle": "Página no encontrada",
+        "title": "Esta página no existe.",
+        "body": "Puede que el enlace sea viejo o tenga un error. Puedes seguir por aquí.",
+        "seeWork": "Ver proyectos",
+        "getInTouch": "Contáctame"
+    }
+}

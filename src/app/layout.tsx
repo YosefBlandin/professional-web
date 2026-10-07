@@ -1,69 +1,95 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Space_Grotesk } from 'next/font/google';
-import Link from 'next/link';
+import type { Metadata, Viewport } from 'next';
+import { Inter_Tight, JetBrains_Mono, Source_Serif_4 } from 'next/font/google';
+import { Footer } from '@/components/site/Footer';
+import { Header } from '@/components/site/Header';
+import { RevealObserver } from '@/components/site/RevealObserver';
+import { themeInitScript } from '@/components/site/ThemeToggle';
+import { profile, siteUrl } from '@/content/profile';
 import './globals.css';
 
-const geistSans = Geist({
-    variable: '--font-geist-sans',
+const sourceSerif = Source_Serif_4({
+    variable: '--font-source-serif',
     subsets: ['latin'],
+    style: ['normal', 'italic'],
+    axes: ['opsz'],
 });
 
-const geistMono = Geist_Mono({
-    variable: '--font-geist-mono',
+const interTight = Inter_Tight({
+    variable: '--font-inter-tight',
     subsets: ['latin'],
+    weight: ['400', '500', '600'],
 });
 
-const spaceGrotesk = Space_Grotesk({
-    variable: '--font-space-grotesk',
+const jetBrainsMono = JetBrains_Mono({
+    variable: '--font-jetbrains-mono',
     subsets: ['latin'],
-    weight: ['400', '500', '600', '700'],
+    weight: ['400', '500', '600'],
 });
+
+const title = `${profile.name} | ${profile.title}`;
 
 export const metadata: Metadata = {
-    title: 'Yosef Blandin | Frontend Engineer',
-    description:
-        'Frontend Engineer with 4+ years of experience building performant, resilient frontend systems aligned with long-term vision and measurable outcomes.',
+    metadataBase: new URL(siteUrl),
+    title: { default: title, template: `%s | ${profile.name}` },
+    description: profile.description,
+    applicationName: profile.name,
+    authors: [{ name: profile.name, url: profile.links.linkedin }],
+    keywords: [
+        'Yosef Blandin',
+        'Mobile Engineer',
+        'Frontend Engineer',
+        'React Native',
+        'React',
+        'Next.js',
+        'TypeScript',
+        'Fintech',
+        'Payments',
+        'Banking apps',
+    ],
+    alternates: { canonical: '/' },
+    openGraph: {
+        type: 'website',
+        url: '/',
+        siteName: profile.name,
+        title,
+        description: profile.description,
+        locale: 'en_US',
+    },
+    twitter: { card: 'summary_large_image', title, description: profile.description },
+};
+
+export const viewport: Viewport = {
+    themeColor: [
+        { media: '(prefers-color-scheme: light)', color: '#f6f5f2' },
+        { media: '(prefers-color-scheme: dark)', color: '#0e1424' },
+    ],
 };
 
 export default function RootLayout({
     children,
+    modal,
 }: Readonly<{
     children: React.ReactNode;
+    modal: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <body
-                className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} antialiased`}
-            >
-                <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
-                    <div className="flex justify-between items-center max-w-screen-2xl mx-auto px-4 py-4">
-                        <Link href="/" className="text-xl font-bold font-[family-name:var(--font-space-grotesk)] neon-text-primary">
-                            Yosef Blandin
-                        </Link>
-                        <nav className="hidden sm:flex gap-6">
-                            <a
-                                href="#work"
-                                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                            >
-                                Work
-                            </a>
-                            <a
-                                href="#testimonials"
-                                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                            >
-                                Testimonials
-                            </a>
-                            <a
-                                href="#about"
-                                className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                            >
-                                About
-                            </a>
-                        </nav>
-                    </div>
-                    <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-                </header>
-                {children}
+        <html
+            lang="en"
+            suppressHydrationWarning
+            className={`${sourceSerif.variable} ${interTight.variable} ${jetBrainsMono.variable}`}
+        >
+            <head>
+                <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+            </head>
+            <body>
+                <a className="skip" href="#main">
+                    Skip to content
+                </a>
+                <Header />
+                <main id="main">{children}</main>
+                <Footer />
+                {modal}
+                <RevealObserver />
             </body>
         </html>
     );

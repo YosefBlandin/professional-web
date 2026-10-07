@@ -29,7 +29,10 @@ export function ContactForm() {
         }
         if (ok) reset();
         setStatus(ok ? 'sent' : 'failed');
-        requestAnimationFrame(() => panel.current?.focus());
+        requestAnimationFrame(() => {
+            panel.current?.focus({ preventScroll: true });
+            panel.current?.scrollIntoView({ block: 'center' });
+        });
     }
 
     if (status === 'sent') {
@@ -65,6 +68,9 @@ export function ContactForm() {
                     id="f-email"
                     type="email"
                     autoComplete="email"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    enterKeyHint="next"
                     placeholder="you@company.com"
                     aria-invalid={errors.email ? 'true' : 'false'}
                     aria-describedby="e-email"
@@ -79,6 +85,8 @@ export function ContactForm() {
                 <input
                     id="f-subject"
                     type="text"
+                    autoComplete="off"
+                    enterKeyHint="next"
                     placeholder="React Native role, payments app"
                     aria-invalid={errors.subject ? 'true' : 'false'}
                     aria-describedby="e-subject"
@@ -92,6 +100,7 @@ export function ContactForm() {
                 <label htmlFor="f-message">Message</label>
                 <textarea
                     id="f-message"
+                    enterKeyHint="send"
                     placeholder="What are you building, and where could I help?"
                     aria-invalid={errors.message ? 'true' : 'false'}
                     aria-describedby="e-message"
@@ -105,7 +114,7 @@ export function ContactForm() {
                 <label htmlFor="f-company">Company</label>
                 <input id="f-company" type="text" tabIndex={-1} autoComplete="off" {...register('company')} />
             </div>
-            <button className="btn btn-primary" type="submit" disabled={isSubmitting}>
+            <button className="btn btn-primary msg-submit" type="submit" disabled={isSubmitting}>
                 {isSubmitting ? 'Sending…' : 'Send message'}{' '}
                 <span className="arrow" aria-hidden="true">
                     →

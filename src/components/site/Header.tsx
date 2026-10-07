@@ -1,8 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
-import { MenuIcon } from './Icons';
+import { useEffect, useRef, useState, type MouseEvent } from 'react';
+import { CloseIcon, MenuIcon } from './Icons';
 import { ThemeToggle } from './ThemeToggle';
 
 const navItems = [
@@ -24,17 +24,37 @@ export function Header() {
         return () => window.removeEventListener('scroll', onScroll);
     }, []);
 
+    // While the menu sheet is open it behaves like a modal: the page behind is inert and doesn't scroll.
     useEffect(() => {
         if (!open) return;
+        const background = [document.getElementById('main'), document.querySelector('.site-footer')];
+        background.forEach((element) => element?.setAttribute('inert', ''));
+        document.documentElement.classList.add('menu-open');
+
         const onKey = (event: KeyboardEvent) => {
             if (event.key === 'Escape') {
                 setOpen(false);
                 menuButton.current?.focus();
             }
         };
+        const closeOnDesktop = window.matchMedia('(min-width: 861px)');
+        const onResize = () => closeOnDesktop.matches && setOpen(false);
         document.addEventListener('keydown', onKey);
-        return () => document.removeEventListener('keydown', onKey);
+        closeOnDesktop.addEventListener('change', onResize);
+
+        return () => {
+            background.forEach((element) => element?.removeAttribute('inert'));
+            document.documentElement.classList.remove('menu-open');
+            document.removeEventListener('keydown', onKey);
+            closeOnDesktop.removeEventListener('change', onResize);
+        };
     }, [open]);
+
+    // A tap on a link or on the empty part of the sheet closes it.
+    function onNavClick(event: MouseEvent<HTMLElement>) {
+        const target = event.target as HTMLElement;
+        if (target.closest('a') || target === event.currentTarget) setOpen(false);
+    }
 
     return (
         <header className={`site-header${scrolled ? ' scrolled' : ''}`} id="top">
@@ -43,17 +63,26 @@ export function Header() {
                     Yosef <i>Blandin</i>
                 </Link>
                 <div className="bar-actions">
-                    <nav className="nav" id="nav" data-open={open} aria-label="Main" onClick={() => setOpen(false)}>
+                    <nav className="nav" id="nav" data-open={open} aria-label="Main" onClick={onNavClick}>
                         {navItems.map((item) => (
                             <Link key={item.href} href={item.href}>
                                 {item.label}
                             </Link>
                         ))}
-                        <Link className="btn btn-primary btn-sm" href="/#contact">
+                        <Link className="btn btn-primary btn-sm nav-cta" href="/#contact">
                             Get in touch
                         </Link>
+                        <div className="nav-theme">
+                            <span>Theme</span>
+                            <ThemeToggle />
+                        </div>
                     </nav>
-                    <ThemeToggle />
+                    <div className="bar-theme">
+                        <ThemeToggle />
+                    </div>
+                    <Link className="btn btn-primary btn-sm header-cta" href="/#contact">
+                        Get in touch
+                    </Link>
                     <button
                         ref={menuButton}
                         className="icon-btn menu-btn"
@@ -63,7 +92,7 @@ export function Header() {
                         aria-label={open ? 'Close menu' : 'Open menu'}
                         onClick={() => setOpen((value) => !value)}
                     >
-                        <MenuIcon />
+                        {open ? <CloseIcon /> : <MenuIcon />}
                     </button>
                 </div>
             </div>

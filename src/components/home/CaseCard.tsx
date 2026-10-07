@@ -60,6 +60,12 @@ export function CaseCard({ project }: { project: Project }) {
                     {project.tags.map((tag) => (
                         <li key={tag}>{tag}</li>
                     ))}
+                    {/* Phones show four tags; the full list is in the case study. */}
+                    {project.tags.length > 4 && (
+                        <li className="tags-more" aria-hidden="true">
+                            +{project.tags.length - 4}
+                        </li>
+                    )}
                 </ul>
                 <div className="case-actions">
                     <Link className="btn btn-ghost btn-sm" href={`/work/${project.slug}`} scroll={false}>

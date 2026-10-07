@@ -22,7 +22,7 @@ export default async function OpengraphImage() {
                     </div>
                     <div style={{ display: 'flex', fontSize: 76, lineHeight: 1.05, letterSpacing: -2 }}>{profile.name}</div>
                     <div style={{ display: 'flex', fontSize: 34, lineHeight: 1.3, color: '#6b1f2a', maxWidth: 620 }}>
-                        Payment and banking apps people trust with their money.
+                        Focused on payments and banking.
                     </div>
                     <div style={{ display: 'flex', fontSize: 24, color: '#5c6270' }}>React · React Native · Next.js · TypeScript</div>
                     <div style={{ display: 'flex', fontSize: 22, color: '#5c6270' }}>

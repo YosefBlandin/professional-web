@@ -1301,6 +1301,7 @@
         .mark {
             display: inline-flex;
             align-items: center;
+            column-gap: 0.25em;
             min-height: 44px;
         }
         .email {

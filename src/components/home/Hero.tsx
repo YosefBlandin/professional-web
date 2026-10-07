@@ -26,9 +26,9 @@ export function Hero() {
                         </div>
                         <h1 id="hero-title">
                             <span className="label hero-name">
-                                {profile.name} · {profile.title}
+                                {profile.name} · {profile.location}
                             </span>
-                            I build payment and banking apps people <em>trust with their money.</em>
+                            Mobile and frontend engineer, <em>focused on payments and banking.</em>
                         </h1>
                         <p className="lede">
                             5+ years shipping <strong>React, React Native, Next.js and TypeScript</strong>, the last three
@@ -62,9 +62,7 @@ export function Hero() {
                             />
                         </div>
                         <figcaption>
-                            <span className="label">
-                                {profile.location} · {profile.timezone}
-                            </span>
+                            <span className="label">{profile.timezone}</span>
                             <span className="label">ES · EN</span>
                         </figcaption>
                     </figure>

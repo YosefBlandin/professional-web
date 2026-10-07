@@ -14,6 +14,11 @@
       "service": "professional-web"
     }
   ],
+  // Serve the site on the custom domain; the middleware redirects www to the apex.
+  "routes": [
+    { "pattern": "yosefblandin.com", "custom_domain": true },
+    { "pattern": "www.yosefblandin.com", "custom_domain": true }
+  ],
   "images": {
     "binding": "IMAGES"
   },

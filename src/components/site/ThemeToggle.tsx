@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { MoonIcon, SunIcon } from './Icons';
 
 export const THEME_KEY = 'yb-theme';
@@ -8,6 +9,7 @@ export const THEME_KEY = 'yb-theme';
 export const themeInitScript = `try{var t=localStorage.getItem('${THEME_KEY}');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}`;
 
 export function ThemeToggle() {
+    const t = useTranslations('nav');
     function toggle() {
         const root = document.documentElement;
         const current =
@@ -23,7 +25,7 @@ export function ThemeToggle() {
     }
 
     return (
-        <button className="icon-btn theme-btn" type="button" onClick={toggle} aria-label="Switch colour theme">
+        <button className="icon-btn theme-btn" type="button" onClick={toggle} aria-label={t('toggleTheme')}>
             <MoonIcon className="moon" />
             <SunIcon className="sun" />
         </button>

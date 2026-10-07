@@ -6,7 +6,7 @@ import growthRoadImg from '@/assets/growthroad.png';
 import wingooImg from '@/assets/wingoo.png';
 
 type Media =
-    | { kind: 'image'; src: StaticImageData; alt: string }
+    | { kind: 'image'; src: StaticImageData; file: string; alt: string }
     | { kind: 'slip'; figure: string; caption: string; rows: [string, string][]; label: string };
 
 export type Project = {
@@ -14,6 +14,10 @@ export type Project = {
     company: string;
     period: string;
     title: string;
+    seoTitle: string;
+    // 140–160 characters: role, problem, stack and result.
+    seoDescription: string;
+    updatedAt: string;
     problem: string;
     outcomes: string[];
     tags: string[];
@@ -28,6 +32,10 @@ export const projects: Project[] = [
         company: 'AIDONIC',
         period: 'Oct 2025 – Present',
         title: 'Aid-payments vendor app',
+        seoTitle: 'AIDONIC case study: aid-payments app in React Native',
+        seoDescription:
+            'How I took AIDONIC’s React Native vendor app from 1.0 to 2.1: 14 languages with RTL Arabic, offline login, QR scanning and OCR bank-transfer payouts.',
+        updatedAt: '2026-10-07',
         problem:
             'NGO vendors hand out cash and voucher aid, often with poor connectivity and in many languages. The app has to work every time.',
         outcomes: [
@@ -75,6 +83,10 @@ export const projects: Project[] = [
         company: 'Partnet Group',
         period: 'Oct 2023 – Present',
         title: 'Bangente banking app',
+        seoTitle: 'Bangente case study: banking app in React Native and Expo',
+        seoDescription:
+            'Lead mobile engineer on Bangente, a bank’s iOS and Android app with 500 users: transfers, QR and NFC tap-to-pay via a custom Expo module and Rust crypto.',
+        updatedAt: '2026-10-07',
         problem: 'A bank needed its own mobile app, from the first line of code to release in both stores.',
         outcomes: [
             'Built and shipped it to 500 active users with EAS Build, through major React Native and Expo upgrades.',
@@ -89,6 +101,7 @@ export const projects: Project[] = [
         media: {
             kind: 'image',
             src: bangenteImg,
+            file: 'bangente2.png',
             alt: 'Three Bangente app screens: the home screen with accounts, the services menu, and the login screen',
         },
         study: {
@@ -119,6 +132,10 @@ export const projects: Project[] = [
         company: 'Smart Compliance',
         period: 'Aug 2024 – Oct 2025',
         title: 'Real-time compliance dashboard',
+        seoTitle: 'Smart Compliance case study: real-time React dashboard',
+        seoDescription:
+            'A real-time compliance dashboard in React, Recharts and GraphQL over WebSockets, with a D3 heat-map of 10k–20k points and Apollo caching to cut load.',
+        updatedAt: '2026-10-07',
         problem:
             'Companies track hundreds of environmental-regulation commitments and need to see risk at a glance, on a wall monitor or a phone.',
         outcomes: [
@@ -131,6 +148,7 @@ export const projects: Project[] = [
         media: {
             kind: 'image',
             src: scImg,
+            file: 'monitoring_app.png',
             alt: 'Smart Compliance dashboard with execution status bars, a risk scatter plot and stacked bar charts',
         },
         study: {
@@ -159,6 +177,10 @@ export const projects: Project[] = [
         company: 'Filtration Advice',
         period: 'Client project',
         title: 'HVAC filtration monitoring',
+        seoTitle: 'Filtration Advice case study: HVAC monitoring in Angular',
+        seoDescription:
+            'Real-time HVAC filtration monitoring in Angular, RxJS and Chart.js over WebSockets, with PDF analysis reports and a multi-step form with async checks.',
+        updatedAt: '2026-10-07',
         problem:
             'Facilities teams need to see how their air filters perform and what they cost, from live sensor data and lab reports.',
         outcomes: [
@@ -171,6 +193,7 @@ export const projects: Project[] = [
         media: {
             kind: 'image',
             src: faImg,
+            file: 'filtrationadvice.png',
             alt: 'Filtration Advice home page for its HVAC air-filtration total-cost-of-ownership software',
         },
         study: {
@@ -199,6 +222,10 @@ export const projects: Project[] = [
         company: 'Turpial Development',
         period: 'Feb 2022 – Sep 2023',
         title: 'Client work: speed, search and dashboards',
+        seoTitle: 'Turpial case study: faster sites, search and dashboards',
+        seoDescription:
+            'Agency work at Turpial: cut a client site’s load from 8s to 1.5s, built a React pharma search (+8% traffic) and Growth Road’s student dashboards.',
+        updatedAt: '2026-10-07',
         problem: 'Agency work for several clients, where speed and search directly affected traffic.',
         outcomes: [
             'Cut a client site’s initial load from 8s to 1.5s, and bounce rate fell 13%.',
@@ -210,6 +237,7 @@ export const projects: Project[] = [
         media: {
             kind: 'image',
             src: growthRoadImg,
+            file: 'growthroad.png',
             alt: 'Growth Road student dashboard with a progress ring, vocational-interest charts and course chapters',
         },
         study: {
@@ -238,6 +266,10 @@ export const projects: Project[] = [
         company: 'Wingoo.io',
         period: 'Feb 2021 – Jan 2022',
         title: 'Wingoo job-matching platform',
+        seoTitle: 'Wingoo case study: Rails to Next.js migration',
+        seoDescription:
+            'As Wingoo’s sole frontend developer, I led the move of a job-matching platform from Rails views to Next.js and TypeScript and cut CSS bloat by 80%.',
+        updatedAt: '2026-10-07',
         problem: 'Companies invite candidates through one registration, so nobody has to search thousands of listings.',
         outcomes: [
             'Joined as the only frontend developer.',
@@ -249,6 +281,7 @@ export const projects: Project[] = [
         media: {
             kind: 'image',
             src: wingooImg,
+            file: 'wingoo.png',
             alt: 'Wingoo home page: “One application, thousands of jobs opportunities”, with partner logos below',
         },
         study: {
@@ -266,7 +299,3 @@ export const projects: Project[] = [
         },
     },
 ];
-
-export function getProject(slug: string) {
-    return projects.find((project) => project.slug === slug);
-}

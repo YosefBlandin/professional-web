@@ -100,7 +100,19 @@
 @layer base {
     html {
         scroll-behavior: smooth;
-        scroll-padding-top: 88px;
+    }
+    html.menu-open {
+        overflow: hidden;
+    }
+    /* Anchored sections clear the sticky header. */
+    [id] {
+        scroll-margin-top: 84px;
+    }
+    a,
+    button,
+    input,
+    textarea {
+        -webkit-tap-highlight-color: transparent;
     }
     body {
         background: var(--paper);
@@ -110,7 +122,7 @@
         line-height: 1.6;
         -webkit-font-smoothing: antialiased;
         text-rendering: optimizeLegibility;
-        overflow-x: hidden;
+        overflow-x: clip;
     }
     a {
         color: inherit;
@@ -143,7 +155,8 @@
     .wrap {
         max-width: var(--wrap);
         margin-inline: auto;
-        padding-inline: var(--gutter);
+        padding-inline: max(var(--gutter), env(safe-area-inset-left, 0px))
+            max(var(--gutter), env(safe-area-inset-right, 0px));
     }
     .label {
         font-family: var(--f-mono);
@@ -187,7 +200,7 @@
             border-color 0.2s ease;
     }
     .btn:active {
-        transform: translateY(1px);
+        transform: scale(0.98);
     }
     .btn:disabled {
         opacity: 0.6;
@@ -197,17 +210,21 @@
         background: var(--accent-fill);
         color: var(--accent-ink);
     }
-    .btn-primary:hover {
-        background: var(--fill-hover);
-        color: var(--fill-hover-ink);
+    @media (hover: hover) {
+        .btn-primary:hover {
+            background: var(--fill-hover);
+            color: var(--fill-hover-ink);
+        }
     }
     .btn-ghost {
         border-color: var(--line);
         color: var(--ink);
         background: transparent;
     }
-    .btn-ghost:hover {
-        border-color: var(--ink);
+    @media (hover: hover) {
+        .btn-ghost:hover {
+            border-color: var(--ink);
+        }
     }
     .btn-sm {
         min-height: 40px;
@@ -217,9 +234,11 @@
     .arrow {
         transition: transform 0.2s ease;
     }
-    a:hover > .arrow,
-    button:hover > .arrow {
-        transform: translateX(3px);
+    @media (hover: hover) {
+        a:hover > .arrow,
+        button:hover > .arrow {
+            transform: translateX(3px);
+        }
     }
     .textlink {
         color: var(--accent);
@@ -296,15 +315,50 @@
         color: var(--ink);
         cursor: pointer;
     }
-    .icon-btn:hover {
-        border-color: var(--line);
+    @media (hover: hover) {
+        .icon-btn:hover {
+            border-color: var(--line);
+        }
     }
     .icon-btn svg {
         width: 20px;
         height: 20px;
     }
-    .menu-btn {
+    .menu-btn,
+    .header-cta,
+    .nav-theme {
         display: none;
+    }
+    /* Language switch: "EN · ES", current language marked, the other a link. */
+    .lang-switch {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--f-mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+    }
+    .lang-switch > * {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding-inline: 8px;
+        color: var(--muted);
+        text-decoration: none;
+    }
+    .lang-switch > * + *::before {
+        content: '·';
+        margin-right: 16px;
+        margin-left: -8px;
+        color: var(--line);
+    }
+    .lang-switch [aria-current='true'] {
+        color: var(--ink);
+        font-weight: 600;
+    }
+    @media (hover: hover) {
+        .lang-switch a:hover {
+            color: var(--accent);
+        }
     }
     .theme-btn .sun {
         display: none;
@@ -327,30 +381,65 @@
         .menu-btn {
             display: inline-grid;
         }
+        .header-cta {
+            display: inline-flex;
+            margin-right: 4px;
+        }
+        .bar-theme,
+        .bar-lang,
+        .nav-cta {
+            display: none;
+        }
+        /* The menu is a sheet that fills the screen below the header. */
         .nav {
             position: absolute;
             left: 0;
             right: 0;
             top: 100%;
+            height: calc(100svh - 68px - env(safe-area-inset-top, 0px));
+            overflow-y: auto;
+            overscroll-behavior: contain;
             flex-direction: column;
             align-items: stretch;
             gap: 0;
-            padding: 8px var(--gutter) 20px;
+            padding: 8px max(var(--gutter), env(safe-area-inset-left, 0px))
+                calc(24px + env(safe-area-inset-bottom, 0px));
             background: var(--paper);
-            border-bottom: 1px solid var(--line);
+            border-top: 1px solid var(--line);
+        }
+        .nav[data-open='true'] {
+            animation: sheet-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
         .nav[data-open='false'] {
             display: none;
         }
         .nav a:not(.btn) {
-            padding: 14px 4px;
-            font-size: 1.05rem;
+            padding: 16px 4px;
+            font-family: var(--f-display);
+            font-size: 1.6rem;
             color: var(--ink);
             border-bottom: 1px solid var(--line);
             border-radius: 0;
         }
-        .nav .btn {
-            margin-top: 16px;
+        .nav-theme {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 4px;
+            color: var(--muted);
+        }
+        /* Inside the sheet, language links keep the compact switch style, not the large nav-link style. */
+        .nav .lang-switch a:not(.btn) {
+            padding: 0 8px;
+            font-family: var(--f-mono);
+            font-size: 0.78rem;
+            color: var(--muted);
+            border-bottom: 0;
+        }
+    }
+    @media (max-width: 380px) {
+        .mark {
+            font-size: 1.25rem;
         }
     }
 
@@ -389,6 +478,14 @@
     }
     .hero h1 {
         font-size: var(--step-4);
+    }
+    .hero-name {
+        display: block;
+        margin-bottom: 20px;
+        letter-spacing: 0.08em;
+    }
+    .hero-id {
+        display: none;
     }
     .hero h1 em {
         color: var(--accent);
@@ -435,13 +532,61 @@
         gap: 12px;
     }
     @media (max-width: 760px) {
+        .hero {
+            padding-block: 28px 48px;
+        }
         .hero-grid {
             grid-template-columns: 1fr;
         }
+        .hero-copy {
+            gap: 22px;
+        }
+        /* Copy first: a compact arch with the name replaces the large portrait. */
         .portrait {
-            justify-self: start;
-            width: min(100%, 320px);
-            order: -1;
+            display: none;
+        }
+        .hero-id {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .avatar {
+            flex: none;
+            width: 88px;
+            aspect-ratio: 4 / 5;
+            border-radius: 999px 999px 12px 12px;
+            overflow: hidden;
+            background: var(--paper-2);
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 28%;
+        }
+        .hero-id-text {
+            display: grid;
+            gap: 4px;
+            min-width: 0;
+        }
+        .hero-id-text .label:first-child {
+            color: var(--ink);
+        }
+        .hero-id-place {
+            font-size: 0.875rem;
+            color: var(--muted);
+        }
+        /* The name is shown in the row above; keep it in the h1 for search engines and screen readers. */
+        .hero-name {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip-path: inset(50%);
+            white-space: nowrap;
+        }
+        .hero .cta-row .btn {
+            flex: 1 1 auto;
         }
     }
 
@@ -555,8 +700,10 @@
         object-position: top left;
         transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
     }
-    .case:hover .media img {
-        transform: scale(1.02);
+    @media (hover: hover) {
+        .case:hover .media img {
+            transform: scale(1.02);
+        }
     }
     /* Slip: used where there is no real screenshot. Reads like a payment receipt: one figure, then key/value rows. */
     .slip {
@@ -656,6 +803,20 @@
         color: var(--muted);
         background: var(--paper);
     }
+    .tags-more {
+        display: none;
+    }
+    .quotes-toggle {
+        display: none;
+    }
+    .not-found {
+        display: grid;
+        gap: 24px;
+        justify-items: start;
+    }
+    .not-found h1 {
+        font-size: var(--step-4);
+    }
     .case-actions {
         display: flex;
         flex-wrap: wrap;
@@ -684,7 +845,7 @@
         top: 50%;
         transform: translate(-50%, -50%);
         width: min(760px, calc(100vw - 32px));
-        max-height: min(86vh, 900px);
+        max-height: min(86dvh, 900px);
         overflow-y: auto;
         overscroll-behavior: contain;
         border: 1px solid var(--line);
@@ -712,9 +873,27 @@
         font-size: var(--step-2);
     }
     .study-body {
-        padding: 24px;
+        padding: 24px 24px calc(24px + env(safe-area-inset-bottom, 0px));
         display: grid;
         gap: 18px;
+    }
+    @media (max-width: 640px) {
+        /* Phones: the case study opens as a full-screen sheet. */
+        .study-dialog {
+            inset: 0;
+            transform: none;
+            width: 100%;
+            height: 100dvh;
+            max-height: none;
+            border: 0;
+            border-radius: 0;
+        }
+        .study-dialog[data-state='open'] {
+            animation: sheet-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .study-head {
+            padding-top: calc(16px + env(safe-area-inset-top, 0px));
+        }
     }
     .study-body h3 {
         margin: 8px 0 0;
@@ -1014,6 +1193,7 @@
         color: var(--paper);
         border-color: color-mix(in srgb, var(--paper) 30%, transparent);
     }
+    .contact .btn-ghost:active,
     .contact .btn-ghost:hover {
         border-color: var(--paper);
     }
@@ -1122,6 +1302,64 @@
         color: var(--paper);
     }
 
+    /* Phones */
+    @media (max-width: 760px) {
+        .case .tags li:nth-child(n + 5):not(.tags-more) {
+            display: none;
+        }
+        .case .tags .tags-more {
+            display: list-item;
+            list-style: none;
+        }
+        .quotes[data-collapsed='true'] .quote:nth-child(n + 4) {
+            display: none;
+        }
+        .quotes-toggle {
+            display: inline-flex;
+            width: 100%;
+        }
+        .quote.clamp blockquote {
+            -webkit-line-clamp: 5;
+        }
+        .msg-submit {
+            width: 100%;
+        }
+    }
+    @media (max-width: 520px) {
+        .section {
+            padding-block: 56px;
+        }
+        .section-head {
+            margin-bottom: 32px;
+        }
+    }
+    /* Touch screens: every target at least 44px tall. */
+    @media (pointer: coarse) {
+        .btn-sm {
+            min-height: 44px;
+        }
+        .mark {
+            display: inline-flex;
+            align-items: center;
+            column-gap: 0.25em;
+            min-height: 44px;
+        }
+        .email {
+            padding-block: 4px;
+        }
+        .textlink {
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
+        .site-footer a {
+            padding-block: 12px;
+        }
+        .quote .more {
+            min-height: 44px;
+        }
+    }
+
     /* Reveal: elements are visible at rest; the animation only plays once they enter view. */
     .reveal.in {
         animation: rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
@@ -1132,6 +1370,12 @@
     from {
         opacity: 0;
         transform: translateY(14px);
+    }
+}
+@keyframes sheet-in {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
     }
 }
 @keyframes pop {

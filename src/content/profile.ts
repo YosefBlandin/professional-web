@@ -1,24 +1,30 @@
 export const profile = {
     name: 'Yosef Blandin',
     title: 'Mobile & Frontend Engineer',
-    eyebrow: 'Mobile & Frontend Engineer · Fintech · Remote (UTC-3)',
+    location: 'Rosario, Argentina',
+    timezone: 'Remote (UTC-3)',
     email: 'yosefleanb@gmail.com',
+    // 140–160 characters: shown as the home meta description and in social previews.
     description:
-        'Mobile and frontend engineer with 5+ years shipping React, React Native, Next.js and TypeScript products, the last three in payments and banking.',
+        'Mobile and frontend engineer in Rosario, Argentina. 5+ years building React Native, React and Next.js apps, the last three for payments and banking.',
     links: {
         linkedin: 'https://www.linkedin.com/in/yosefblandin/',
         github: 'https://github.com/YosefBlandin',
         upwork: 'https://www.upwork.com/freelancers/~0125393fa7ef0842c8?mp_source=share',
     },
     facts: [
-        { label: 'Based', value: 'Remote, UTC-3' },
+        { label: 'Based', value: 'Rosario, Argentina · Remote (UTC-3)' },
         { label: 'Languages', value: 'Spanish (native) · English (professional working, B2)' },
         { label: 'Open source', value: 'Contributor to SWC (Rust)' },
         { label: 'Education', value: 'Platzi Frontend Developer, plus 65 certifications' },
     ],
 };
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+export const productionHost = 'yosefblandin.com';
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? `https://${productionHost}`;
+
+// Bump when page content changes; feeds sitemap lastmod and ProfilePage dateModified.
+export const siteUpdatedAt = '2026-10-07';
 
 export const proof = [
     { value: '5+', caption: 'years shipping web and mobile products' },

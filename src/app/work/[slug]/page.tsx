@@ -4,6 +4,8 @@ import { notFound } from 'next/navigation';
 import { ProjectMedia } from '@/components/home/CaseCard';
 import { CaseStudyBody, studyKicker } from '@/components/study/CaseStudy';
 import { getProject, projects } from '@/content/projects';
+import { caseStudyJsonLd, jsonLdScript } from '@/lib/jsonld';
+import { pageMetadata } from '@/lib/metadata';
 
 type Params = { params: Promise<{ slug: string }> };
 
@@ -16,12 +18,11 @@ export const dynamicParams = false;
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
     const project = getProject((await params).slug);
     if (!project) return {};
-    return {
-        title: project.title,
-        description: project.problem,
-        alternates: { canonical: `/work/${project.slug}` },
-        openGraph: { title: project.title, description: project.problem, url: `/work/${project.slug}` },
-    };
+    return pageMetadata({
+        title: project.seoTitle,
+        description: project.seoDescription,
+        path: `/work/${project.slug}`,
+    });
 }
 
 export default async function CaseStudyPage({ params }: Params) {
@@ -30,6 +31,7 @@ export default async function CaseStudyPage({ params }: Params) {
 
     return (
         <article className="study-page">
+            <script type="application/ld+json" dangerouslySetInnerHTML={jsonLdScript(caseStudyJsonLd(project))} />
             <div className="wrap">
                 <div className="inner">
                     <Link className="btn btn-ghost btn-sm back" href="/#work">

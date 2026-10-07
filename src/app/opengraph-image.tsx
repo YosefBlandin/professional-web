@@ -17,14 +17,17 @@ export default async function OpengraphImage() {
         (
             <div style={{ display: 'flex', width: '100%', height: '100%', background: '#f6f5f2', color: '#14213d' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', flex: 1, padding: '0 72px', gap: 28 }}>
-                    <div style={{ fontSize: 22, letterSpacing: 3, textTransform: 'uppercase', color: '#5c6270' }}>
+                    <div style={{ display: 'flex', fontSize: 22, letterSpacing: 3, textTransform: 'uppercase', color: '#5c6270' }}>
                         Mobile & Frontend Engineer · Fintech
                     </div>
-                    <div style={{ fontSize: 76, lineHeight: 1.05, letterSpacing: -2 }}>{profile.name}</div>
-                    <div style={{ fontSize: 34, lineHeight: 1.3, color: '#6b1f2a', maxWidth: 620 }}>
+                    <div style={{ display: 'flex', fontSize: 76, lineHeight: 1.05, letterSpacing: -2 }}>{profile.name}</div>
+                    <div style={{ display: 'flex', fontSize: 34, lineHeight: 1.3, color: '#6b1f2a', maxWidth: 620 }}>
                         Payment and banking apps people trust with their money.
                     </div>
-                    <div style={{ fontSize: 24, color: '#5c6270' }}>React · React Native · Next.js · TypeScript</div>
+                    <div style={{ display: 'flex', fontSize: 24, color: '#5c6270' }}>React · React Native · Next.js · TypeScript</div>
+                    <div style={{ display: 'flex', fontSize: 22, color: '#5c6270' }}>
+                        {profile.location} · {profile.timezone}
+                    </div>
                 </div>
                 <img src={portraitSrc} alt="" width={420} height={630} style={{ objectFit: 'cover', objectPosition: '50% 30%' }} />
             </div>

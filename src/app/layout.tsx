@@ -26,36 +26,14 @@ const jetBrainsMono = JetBrains_Mono({
     weight: ['400', '500', '600'],
 });
 
-const title = `${profile.name} | ${profile.title}`;
-
 export const metadata: Metadata = {
     metadataBase: new URL(siteUrl),
-    title: { default: title, template: `%s | ${profile.name}` },
+    title: { default: `${profile.name} | ${profile.title}`, template: `%s | ${profile.name}` },
     description: profile.description,
     applicationName: profile.name,
     authors: [{ name: profile.name, url: profile.links.linkedin }],
-    keywords: [
-        'Yosef Blandin',
-        'Mobile Engineer',
-        'Frontend Engineer',
-        'React Native',
-        'React',
-        'Next.js',
-        'TypeScript',
-        'Fintech',
-        'Payments',
-        'Banking apps',
-    ],
-    alternates: { canonical: '/' },
-    openGraph: {
-        type: 'website',
-        url: '/',
-        siteName: profile.name,
-        title,
-        description: profile.description,
-        locale: 'en_US',
-    },
-    twitter: { card: 'summary_large_image', title, description: profile.description },
+    openGraph: { type: 'website', siteName: profile.name, locale: 'en_US' },
+    twitter: { card: 'summary_large_image' },
 };
 
 export const viewport: Viewport = {

@@ -1,27 +1,22 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
+import { fontVariables } from './fonts';
+import './globals.css';
 
-export const metadata: Metadata = {
-    title: 'Page not found',
-    robots: { index: false },
-};
-
-export default function NotFound() {
+// Fallback for requests that never reach a locale (the middleware skips them), so it needs its own <html>.
+export default function GlobalNotFound() {
     return (
-        <section className="section" aria-labelledby="nf-title">
-            <div className="wrap not-found">
-                <p className="label">404</p>
-                <h1 id="nf-title">This page doesn’t exist.</h1>
-                <p className="lede">The link may be old or mistyped. Here’s where to go instead.</p>
-                <div className="cta-row">
-                    <Link className="btn btn-primary" href="/#work">
-                        See selected work
-                    </Link>
-                    <Link className="btn btn-ghost" href="/#contact">
-                        Get in touch
-                    </Link>
-                </div>
-            </div>
-        </section>
+        <html lang="en" className={fontVariables}>
+            <body>
+                <section className="section">
+                    <div className="wrap not-found">
+                        <p className="label">404</p>
+                        <h1>This page doesn’t exist.</h1>
+                        <Link className="btn btn-primary" href="/">
+                            Go to the home page
+                        </Link>
+                    </div>
+                </section>
+            </body>
+        </html>
     );
 }

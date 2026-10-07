@@ -329,6 +329,37 @@
     .nav-theme {
         display: none;
     }
+    /* Language switch: "EN · ES", current language marked, the other a link. */
+    .lang-switch {
+        display: inline-flex;
+        align-items: center;
+        font-family: var(--f-mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+    }
+    .lang-switch > * {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding-inline: 8px;
+        color: var(--muted);
+        text-decoration: none;
+    }
+    .lang-switch > * + *::before {
+        content: '·';
+        margin-right: 16px;
+        margin-left: -8px;
+        color: var(--line);
+    }
+    .lang-switch [aria-current='true'] {
+        color: var(--ink);
+        font-weight: 600;
+    }
+    @media (hover: hover) {
+        .lang-switch a:hover {
+            color: var(--accent);
+        }
+    }
     .theme-btn .sun {
         display: none;
     }
@@ -355,6 +386,7 @@
             margin-right: 4px;
         }
         .bar-theme,
+        .bar-lang,
         .nav-cta {
             display: none;
         }
@@ -395,6 +427,14 @@
             justify-content: space-between;
             padding: 12px 4px;
             color: var(--muted);
+        }
+        /* Inside the sheet, language links keep the compact switch style, not the large nav-link style. */
+        .nav .lang-switch a:not(.btn) {
+            padding: 0 8px;
+            font-family: var(--f-mono);
+            font-size: 0.78rem;
+            color: var(--muted);
+            border-bottom: 0;
         }
     }
     @media (max-width: 380px) {
@@ -1301,6 +1341,7 @@
         .mark {
             display: inline-flex;
             align-items: center;
+            column-gap: 0.25em;
             min-height: 44px;
         }
         .email {

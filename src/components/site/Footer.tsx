@@ -1,6 +1,8 @@
+import { useTranslations } from 'next-intl';
 import { profile } from '@/content/profile';
 
 export function Footer() {
+    const t = useTranslations('footer');
     return (
         <footer className="site-footer">
             <div className="wrap bar">
@@ -17,7 +19,7 @@ export function Footer() {
                     <a href={profile.links.upwork} target="_blank" rel="noopener">
                         Upwork
                     </a>
-                    <a href="#top">Back to top ↑</a>
+                    <a href="#top">{t('backToTop')} ↑</a>
                 </nav>
             </div>
         </footer>

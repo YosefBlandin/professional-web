@@ -1,6 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import type { Project } from '@/content/projects';
+import { Link } from '@/i18n/navigation';
 
 export function ProjectMedia({ project, priority = false }: { project: Project; priority?: boolean }) {
     const { media } = project;
@@ -41,6 +42,7 @@ export function ProjectLink({ project }: { project: Project }) {
 }
 
 export function CaseCard({ project }: { project: Project }) {
+    const t = useTranslations('work');
     return (
         <li className="case reveal">
             <ProjectMedia project={project} />
@@ -69,7 +71,7 @@ export function CaseCard({ project }: { project: Project }) {
                 </ul>
                 <div className="case-actions">
                     <Link className="btn btn-ghost btn-sm" href={`/work/${project.slug}`} scroll={false}>
-                        Read case study{' '}
+                        {t('readCaseStudy')}{' '}
                         <span className="arrow" aria-hidden="true">
                             →
                         </span>

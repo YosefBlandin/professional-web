@@ -1,8 +1,10 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
-export function CopyButton({ text, label = 'Copy', className = 'btn btn-ghost btn-sm' }: { text: string; label?: string; className?: string }) {
+export function CopyButton({ text, label, className = 'btn btn-ghost btn-sm' }: { text: string; label?: string; className?: string }) {
+    const t = useTranslations('contact');
     const [state, setState] = useState<'idle' | 'copied' | 'failed'>('idle');
 
     function flash(next: 'copied' | 'failed') {
@@ -36,7 +38,7 @@ export function CopyButton({ text, label = 'Copy', className = 'btn btn-ghost bt
 
     return (
         <button className={className} type="button" onClick={copy} aria-live="polite">
-            {state === 'copied' ? 'Copied' : state === 'failed' ? 'Select and copy' : label}
+            {state === 'copied' ? t('copied') : state === 'failed' ? t('selectAndCopy') : (label ?? t('copy'))}
         </button>
     );
 }

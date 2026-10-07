@@ -1,16 +1,32 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRef, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
+import { useMemo, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { sendEmail } from '@/actions/sendEmail';
 import { CopyButton } from '@/components/site/CopyButton';
 import { profile } from '@/content/profile';
-import { sendEmailSchema, type SendEmailValues } from '@/schemas/sendEmailSchema';
+import type { Locale } from '@/i18n/routing';
+import { buildSendEmailSchema, type SendEmailValues } from '@/schemas/sendEmailSchema';
 
 type Status = 'idle' | 'sent' | 'failed';
 
 export function ContactForm() {
+    const t = useTranslations('contact');
+    const locale = useLocale() as Locale;
+    const schema = useMemo(
+        () =>
+            buildSendEmailSchema({
+                emailRequired: t('errors.emailRequired'),
+                emailInvalid: t('errors.emailInvalid'),
+                subjectRequired: t('errors.subjectRequired'),
+                subjectTooLong: t('errors.subjectTooLong'),
+                messageRequired: t('errors.messageRequired'),
+                messageTooLong: t('errors.messageTooLong'),
+            }),
+        [t],
+    );
     const [status, setStatus] = useState<Status>('idle');
     const panel = useRef<HTMLDivElement>(null);
     const {
@@ -18,12 +34,12 @@ export function ContactForm() {
         handleSubmit,
         reset,
         formState: { errors, isSubmitting },
-    } = useForm<SendEmailValues>({ resolver: zodResolver(sendEmailSchema) });
+    } = useForm<SendEmailValues>({ resolver: zodResolver(schema) });
 
     async function onSubmit(values: SendEmailValues) {
         let ok = false;
         try {
-            ok = (await sendEmail(values)).ok;
+            ok = (await sendEmail(values, locale)).ok;
         } catch {
             // Network or server failure; the failed panel offers the email address instead.
         }
@@ -39,11 +55,11 @@ export function ContactForm() {
         return (
             <div className="ready" ref={panel} tabIndex={-1} role="status">
                 <p>
-                    <strong>Message sent.</strong> I’ll reply within one working day.
+                    <strong>{t('sentTitle')}</strong> {t('sentBody')}
                 </p>
                 <div className="cta-row">
                     <button className="btn btn-ghost btn-sm" type="button" onClick={() => setStatus('idle')}>
-                        Send another
+                        {t('sendAnother')}
                     </button>
                 </div>
             </div>
@@ -55,15 +71,15 @@ export function ContactForm() {
             {status === 'failed' && (
                 <div className="ready" ref={panel} tabIndex={-1} role="alert">
                     <p>
-                        <strong>Your message didn’t send.</strong> Try again, or email me directly at {profile.email}.
+                        <strong>{t('failedTitle')}</strong> {t('failedBody', { email: profile.email })}
                     </p>
                     <div className="cta-row">
-                        <CopyButton text={profile.email} label="Copy email" />
+                        <CopyButton text={profile.email} label={t('copyEmail')} />
                     </div>
                 </div>
             )}
             <div className="field">
-                <label htmlFor="f-email">Your email</label>
+                <label htmlFor="f-email">{t('emailLabel')}</label>
                 <input
                     id="f-email"
                     type="email"
@@ -71,7 +87,7 @@ export function ContactForm() {
                     autoCapitalize="off"
                     spellCheck={false}
                     enterKeyHint="next"
-                    placeholder="you@company.com"
+                    placeholder={t('emailPlaceholder')}
                     aria-invalid={errors.email ? 'true' : 'false'}
                     aria-describedby="e-email"
                     {...register('email')}
@@ -81,13 +97,13 @@ export function ContactForm() {
                 </span>
             </div>
             <div className="field">
-                <label htmlFor="f-subject">Subject</label>
+                <label htmlFor="f-subject">{t('subjectLabel')}</label>
                 <input
                     id="f-subject"
                     type="text"
                     autoComplete="off"
                     enterKeyHint="next"
-                    placeholder="React Native role, payments app"
+                    placeholder={t('subjectPlaceholder')}
                     aria-invalid={errors.subject ? 'true' : 'false'}
                     aria-describedby="e-subject"
                     {...register('subject')}
@@ -97,11 +113,11 @@ export function ContactForm() {
                 </span>
             </div>
             <div className="field">
-                <label htmlFor="f-message">Message</label>
+                <label htmlFor="f-message">{t('messageLabel')}</label>
                 <textarea
                     id="f-message"
                     enterKeyHint="send"
-                    placeholder="What are you building, and where could I help?"
+                    placeholder={t('messagePlaceholder')}
                     aria-invalid={errors.message ? 'true' : 'false'}
                     aria-describedby="e-message"
                     {...register('message')}
@@ -115,7 +131,7 @@ export function ContactForm() {
                 <input id="f-company" type="text" tabIndex={-1} autoComplete="off" {...register('company')} />
             </div>
             <button className="btn btn-primary msg-submit" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending…' : 'Send message'}{' '}
+                {isSubmitting ? t('sending') : t('send')}{' '}
                 <span className="arrow" aria-hidden="true">
                     →
                 </span>

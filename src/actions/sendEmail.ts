@@ -2,11 +2,12 @@
 
 import { Resend } from 'resend';
 import { profile } from '@/content/profile';
+import type { Locale } from '@/i18n/routing';
 import { sendEmailSchema, type SendEmailValues } from '@/schemas/sendEmailSchema';
 
 export type SendEmailResult = { ok: true } | { ok: false; error: 'invalid' | 'unavailable' | 'failed' };
 
-export async function sendEmail(values: SendEmailValues): Promise<SendEmailResult> {
+export async function sendEmail(values: SendEmailValues, locale: Locale = 'en'): Promise<SendEmailResult> {
     const parsed = sendEmailSchema.safeParse(values);
     if (!parsed.success) {
         // A filled honeypot means a bot; report success so it doesn't retry.
@@ -24,7 +25,7 @@ export async function sendEmail(values: SendEmailValues): Promise<SendEmailResul
         from: process.env.CONTACT_FROM_EMAIL ?? 'Portfolio <onboarding@resend.dev>',
         to: profile.email,
         replyTo: email,
-        subject: `[Portfolio] ${subject}`,
+        subject: `[Portfolio]${locale === 'en' ? '' : ` [${locale.toUpperCase()}]`} ${subject}`,
         text: `${message}\n\nReply to: ${email}`,
     });
 

@@ -2,10 +2,12 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useRef, useState, type ReactNode } from 'react';
 import { CloseIcon } from '@/components/site/Icons';
 
 export function StudyModal({ kicker, title, children }: { kicker: string; title: string; children: ReactNode }) {
+    const t = useTranslations('study');
     const router = useRouter();
     const [open, setOpen] = useState(true);
     // The "Read case study" link that opened this dialog; focus goes back to it on close.
@@ -39,7 +41,7 @@ export function StudyModal({ kicker, title, children }: { kicker: string; title:
                                 <h2>{title}</h2>
                             </Dialog.Title>
                         </div>
-                        <Dialog.Close className="icon-btn" aria-label="Close case study">
+                        <Dialog.Close className="icon-btn" aria-label={t('close')}>
                             <CloseIcon />
                         </Dialog.Close>
                     </div>
